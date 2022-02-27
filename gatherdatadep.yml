@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name : gatherdatajob
+  labels:
+    binance: gatherdata
+spec:
+  schedule: "* 5 */15 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: gatherdatajob
+            image: karthikdhanusu/gatherdataimg:v1.1
+            imagePullPolicy: Always
+            volumeMounts:
+            - name: binance-volume  
+              mountPath: "/mnt/binance"
+          volumes:
+          - name: binance-volume
+            persistentVolumeClaim:
+              claimName: binance-pvc
+          restartPolicy: Never
+          imagePullSecrets:
+          - name: kdhanusu
+  
