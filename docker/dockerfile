@@ -1,0 +1,10 @@
+FROM python:3.8.2
+RUN mkdir -p /binance/gatherdata/src
+WORKDIR /binance/gatherdata/src
+RUN pip install -U pip
+RUN pip install python-binance pandas ta numpy finta
+COPY . /binance/gatherdata/src
+RUN cp /binance/gatherdata/src/finta.py /usr/local/lib/python3.8/site-packages/
+EXPOSE 80
+EXPOSE 443
+ENTRYPOINT ["python3.8", "gatherdat.py"]
