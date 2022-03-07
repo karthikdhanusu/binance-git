@@ -1,19 +1,20 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name : analysisjob
+  name : analysisjob-2
   labels:
-    binance: gatherdata
+    binance: analyze
 spec:
-  schedule: "*/9 * * * *"
-  #schedule: "* 5 */15 * *"
+  #schedule: "*/1 * * * *"
+  schedule: "2 7 */15 * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: analysisjob
-            image: karthikdhanusu/gatherdataimg:masteranalysis
+          - name: analysis-2
+            image: karthikdhanusu/gatherdataimg:v1.2
+            command: ["sh", "-c", "mkdir mastertech && cp -f /binance/gatherdata/src/techmaster/techmaster2.txt /binance/gatherdata/src/mastertech/ && mv /binance/gatherdata/src/mastertech/techmaster2.txt /binance/gatherdata/src/mastertech/techmaster.txt && python3.8 ./masteranalysis.py"]
             imagePullPolicy: IfNotPresent
             volumeMounts:
             - name: binance-volume  
@@ -25,4 +26,4 @@ spec:
           restartPolicy: Never
           imagePullSecrets:
           - name: kdhanusu
-  
+          

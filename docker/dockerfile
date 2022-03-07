@@ -1,4 +1,6 @@
 FROM python:3.8.2
+RUN apt update
+RUN apt install vim -y
 RUN mkdir -p /binance/gatherdata/src
 WORKDIR /binance/gatherdata/src
 RUN pip install -U pip
@@ -7,4 +9,4 @@ COPY . /binance/gatherdata/src
 RUN cp /binance/gatherdata/src/finta.py /usr/local/lib/python3.8/site-packages/
 EXPOSE 80
 EXPOSE 443
-ENTRYPOINT ["python3.8", "gatherdat.py"]
+#ENTRYPOINT ["python3.8", "masteranalysis.py"]

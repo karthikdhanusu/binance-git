@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 500Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:
     path: "/mnt/binance"
 
@@ -20,7 +20,7 @@ metadata:
   name: binance-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 490Gi

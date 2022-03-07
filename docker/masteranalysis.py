@@ -10,7 +10,7 @@ import os
 import shutil
 
 csvfile = '/mnt/binance/input/techmaster.txt'
-arr = os.listdir('/mnt/binance/')
+arr = os.listdir('/mnt/binance/gatherdata/')
 
 '''def movetoshare(item):
     if os.path.exists("C:\\binance\\output\\" + str(item)):
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     a = np.array(b)
     for filename in arr:
         item = filename.split('_')[0][:-4]
-        if item == items:
+        if item in items:
             for h in a:
                 df = pd.read_csv("/mnt/binance/gatherdata/" + filename, sep=',')
                 df['datetime'] = pd.to_datetime(df['Open time'], unit='ms')
