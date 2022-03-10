@@ -143,6 +143,6 @@ if __name__ == '__main__':
                         else:
                             pass
             #movetoshare(item)
-            #os.remove('/mnt/binance/gatherdata/'+filename)
+            os.remove('/mnt/binance/gatherdata/'+filename)
 
 

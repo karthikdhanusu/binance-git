@@ -14,23 +14,29 @@ spec:
           containers:
           - name: gatherdatajob
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["python3.8", "./gatherdat.py"]
-            imagePullPolicy: IfNotPresent
+            command: ["sh","-c","sleep 12000 && python3.8", "./gatherdat.py"]
+            imagePullPolicy: Always
             volumeMounts:
-            - name: binance-volume  
+            - name: binancevol
               mountPath: "/mnt/binance"
           volumes:
-          - name: binance-volume
+          - name: binancevol
             persistentVolumeClaim:
-              claimName: binance-pvc
+              claimName: binance-pvc-hs
           restartPolicy: Never
+          automountServiceAccountToken: false
           imagePullSecrets:
           - name: kdhanusu
             #initContainers:
             #- name: init-pvfoldercreate
             #image: busybox:1.28
-            #command: ['sh', '-c', 'mkdir -f /mnt/binance/gatherdata/test']
+            #command: ['sh', '-c', 'mkdir -f /mnt/binance/gatherdata/']
             #volumeMounts:
-            #- name: binance-volume
-            #  mountPath: "/mnt/binance"        
+            #- name: binancevol
+            #  mountPath: "/mnt/binance"
+            #volumes:
+            #- name: binancevol
+            #  persistentVolumeClaim:
+            #    claimName: binance-pvc-hs     
+                    
 

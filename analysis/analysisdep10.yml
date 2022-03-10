@@ -5,8 +5,8 @@ metadata:
   labels:
     binance: analyze
 spec:
-  #schedule: "*/10 * * * *"
-  schedule: "10 7 */15 * *"
+  schedule: "*/1 * * * *"
+    #schedule: "10 7 */15 * *"
   jobTemplate:
     spec:
       template:
@@ -15,14 +15,14 @@ spec:
           - name: analysis-10
             image: karthikdhanusu/gatherdataimg:v1.2
             command: ["sh", "-c", "mkdir mastertech && cp -f /binance/gatherdata/src/techmaster/techmaster10.txt /binance/gatherdata/src/mastertech/ && mv /binance/gatherdata/src/mastertech/techmaster10.txt /binance/gatherdata/src/mastertech/techmaster.txt && python3.8 ./masteranalysis.py"]
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             volumeMounts:
-            - name: binance-volume  
+            - name: binancevol
               mountPath: "/mnt/binance"
           volumes:
-          - name: binance-volume
+          - name: binancevol
             persistentVolumeClaim:
-              claimName: binance-pvc
+              claimName: binance-pvc-hs
           restartPolicy: Never
           imagePullSecrets:
           - name: kdhanusu

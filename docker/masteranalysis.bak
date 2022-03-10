@@ -9,7 +9,7 @@ import ast
 import os
 import shutil
 
-csvfile = '/binance/gatherdata/src/mastertech/techmaster.txt'
+csvfile = '/mnt/binance/input/techmaster.txt'
 arr = os.listdir('/mnt/binance/gatherdata/')
 
 '''def movetoshare(item):
@@ -100,48 +100,52 @@ if __name__ == '__main__':
                 vptslo = h[4]
                 output = filename.split('_')[0] + '_stc' + str(stcwindow) + str(stcslope) + '_CH22' + str(
                     atrwindow) + '_vpt' + str(mawin) + '_vptsl' + str(vptslo) + '.csv'
-                df = pd.read_csv("/mnt/binance/gatherdata/" + filename, sep=',')
-                df['datetime'] = pd.to_datetime(df['Open time'], unit='ms')
-                rowlen = len(df['datetime'])
-                df['high'] = df['High']
-                df['low'] = df['Low']
-                df['open'] = df['Open']
-                df['close'] = df['Close']
-                df['volume'] = df['Volume']
-                atrwindow = h[0]
-                stcwindow = h[1]
-                stcslope = h[2]
-                mawin = h[3]
-                vptslo = h[4]
-                output = filename.split('_')[0] + '_stc' + str(stcwindow) + str(stcslope) + '_CH22' + str(
-                            atrwindow) + '_vpt' + str(mawin) + '_vptsl' + str(vptslo) + '.csv'
-                df['vfi'] = TA.VFI(ohlc=df)
-                df['vpt'] = TA.VPT(ohlc=df)
-                atro = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
-                        vpt=df['vpt']).atr_ind()
-                stco = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
-                        vpt=df['vpt']).stcyc()
-                vptmao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
-                            vpt=df['vpt']).mavpt()
-                chan = chan_ind()
-                df['celg'] = chan[0]
-                df['cest'] = chan[1]
-                df = pd.concat(
-                        [df['datetime'], df['Open'], df['High'], df['Low'], df['Close'], df['Volume'], stco['stc'],
-                        stco['stcslo'],df['celg'], df['cest'],df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
-                for i in range(1, 48):
-                    if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i)):
-                        os.makedirs("/mnt/binance/output/" + str(item) + "/" + str(i))
                 for i in range(1, 48):
                     list = os.listdir("/mnt/binance/output/" + str(item) + "/" + str(i))
                     if len(list) < 45:
-                        if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output):
-                            df.to_csv("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output)
-                            print(output)
-                            i = 1
-                            break
-                        else:
-                            pass
+                        if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output):    
+                            df = pd.read_csv("/mnt/binance/gatherdata/" + filename, sep=',')
+                            df['datetime'] = pd.to_datetime(df['Open time'], unit='ms')
+                            rowlen = len(df['datetime'])
+                            df['high'] = df['High']
+                            df['low'] = df['Low']
+                            df['open'] = df['Open']
+                            df['close'] = df['Close']
+                            df['volume'] = df['Volume']
+                            atrwindow = h[0]
+                            stcwindow = h[1]
+                            stcslope = h[2]
+                            mawin = h[3]
+                            vptslo = h[4]
+                            output = filename.split('_')[0] + '_stc' + str(stcwindow) + str(stcslope) + '_CH22' + str(
+                                        atrwindow) + '_vpt' + str(mawin) + '_vptsl' + str(vptslo) + '.csv'
+                            df['vfi'] = TA.VFI(ohlc=df)
+                            df['vpt'] = TA.VPT(ohlc=df)
+                            atro = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
+                                    vpt=df['vpt']).atr_ind()
+                            stco = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
+                                    vpt=df['vpt']).stcyc()
+                            vptmao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'],
+                                        vpt=df['vpt']).mavpt()
+                            chan = chan_ind()
+                            df['celg'] = chan[0]
+                            df['cest'] = chan[1]
+                            df = pd.concat(
+                                    [df['datetime'], df['Open'], df['High'], df['Low'], df['Close'], df['Volume'], stco['stc'],
+                                    stco['stcslo'],df['celg'], df['cest'],df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
+                            for i in range(1, 48):
+                                if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i)):
+                                    os.makedirs("/mnt/binance/output/" + str(item) + "/" + str(i))
+                            for i in range(1, 48):
+                                list = os.listdir("/mnt/binance/output/" + str(item) + "/" + str(i))
+                                if len(list) < 45:
+                                    if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output):
+                                        df.to_csv("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output)
+                                        print(output)
+                                        i = 1
+                                        break
+                                    else:
+                                        pass
             #movetoshare(item)
             #os.remove('/mnt/binance/gatherdata/'+filename)
 

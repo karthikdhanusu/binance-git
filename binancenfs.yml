@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: binance-nfs-pvc
+spec:
+  storageClassName: csi-cinder-high-speed
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 490Gi
