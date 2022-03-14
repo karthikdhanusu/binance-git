@@ -129,12 +129,12 @@ if __name__ == '__main__':
                 df = pd.concat(
                         [df['datetime'], df['Open'], df['High'], df['Low'], df['Close'], df['Volume'], stco['stc'],
                         stco['stcslo'],df['celg'], df['cest'],df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
-                for i in range(1, 26):
+                for i in range(1, 70):
                     if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i)):
                         os.makedirs("/mnt/binance/output/" + str(item) + "/" + str(i))
-                for i in range(1, 26):
+                for i in range(1, 70):
                     list = os.listdir("/mnt/binance/output/" + str(item) + "/" + str(i))
-                    if len(list) < 20:
+                    if len(list) < 45:
                         if not os.path.exists("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output):
                             df.to_csv("/mnt/binance/output/" + str(item) + "/" + str(i) + "/" + output)
                             print(output)

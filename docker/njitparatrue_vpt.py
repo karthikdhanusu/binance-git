@@ -5,7 +5,7 @@ import numpy as np
 from timeit import default_timer as timer
 import os, shutil
 
-files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48]
+files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
 arr = os.listdir('/mnt/binance/output/')
 arr1 =  os.listdir('/mnt/binance/gatherdata/')
 npydata = 'pairsmastereven.npy'
@@ -24,7 +24,7 @@ def logic(a, df_open, df_high, df_low, df_close, df_stc, df_stcslo, df_celg, df_
         rows = 0
         p = 0
         l = 0
-        btc = 10000
+        btc = 0.1
         buyq = 0
         sl = 0
         for i in prange(len(df_open)):
@@ -84,10 +84,10 @@ def logic(a, df_open, df_high, df_low, df_close, df_stc, df_stcslo, df_celg, df_
 
 
 if __name__ == '__main__':
-     set_num_threads(40)
+     set_num_threads(31)
      for item in arr:
          for i in files:
-             if os.path.exists('/mnt/binance/output/'+str(item)+'/'+str(i)) and len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))) == 80:
+             if os.path.exists('/mnt/binance/output/'+str(item)+'/'+str(i)) and len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))) == 20:
                  inputfilelist = os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))
                  if 'running.lck' not in inputfilelist:
                      with open('/mnt/binance/output/'+str(item)+'/'+str(i)+'/running.lck', 'w') as f:

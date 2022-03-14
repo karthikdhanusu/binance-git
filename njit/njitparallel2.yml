@@ -1,20 +1,20 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name : analysisjob-1
+  name : njitparalleljob-2
   labels:
-    binance: analyze
+    binance: njit
 spec:
   #schedule: "*/1 * * * *"
-  schedule: "1 7 */30 * *"
+  schedule: "0 7 */30 * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: analysis-1
+          - name: njit-2
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["sh", "-c", " mkdir mastertech && cp -f /binance/gatherdata/src/techmaster/techmaster1.txt /binance/gatherdata/src/mastertech/ && mv /binance/gatherdata/src/mastertech/techmaster1.txt /binance/gatherdata/src/mastertech/techmaster.txt && python3.8 ./masteranalysis.py"]
+            command: ["python3.8", "./njitparatrue_vpt.py"]
             imagePullPolicy: Always
             volumeMounts:
             - name: binancevol

@@ -5,8 +5,8 @@ metadata:
   labels:
     binance: analyze
 spec:
-  schedule: "*/1 * * * *"
-    #schedule: "3 7 */15 * *"
+  #schedule: "*/1 * * * *"
+  schedule: "3 7 */30 * *"
   jobTemplate:
     spec:
       template:
@@ -22,8 +22,9 @@ spec:
           volumes:
           - name: binancevol
             persistentVolumeClaim:
-              claimName: binance-pvc-hs
+              claimName: nfs-pvc
           restartPolicy: Never
+          automountServiceAccountToken: false
           imagePullSecrets:
           - name: kdhanusu
           
