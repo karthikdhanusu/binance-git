@@ -1,9 +1,10 @@
 from binance.client import Client
 import pandas as pd
 import os
+import shutil
 
 if __name__ == '__main__':
-    lists = ['BTCUSDT']
+    lists = ['BTCUSDT','ETHBTC']
     dict1 = {}
     presicion = 0
     for i in lists:
@@ -51,3 +52,8 @@ if __name__ == '__main__':
             os.makedirs('/mnt/binance/input/inputparam')
         with open('/mnt/binance/input/inputparam/'+str(i)+'.txt', 'w') as f:
             f.write(str(c))
+        try:
+            shutil.rmtree('/mnt/binance/output/'+str(i))
+        except:
+            pass
+
