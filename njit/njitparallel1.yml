@@ -6,7 +6,7 @@ metadata:
     binance: njit
 spec:
   #schedule: "*/1 * * * *"
-  schedule: "*/15  18 */31 * *"
+  schedule: "*/15  18 */20 * *"
   jobTemplate:
     spec:
       template:

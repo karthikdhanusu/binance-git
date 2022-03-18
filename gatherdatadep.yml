@@ -6,7 +6,7 @@ metadata:
     binance: gatherdata
 spec:
   #schedule: "*/1 * * * *"
-  schedule: "* 5 */30 * *"
+  schedule: "* 5 */19 * *"
   jobTemplate:
     spec:
       template:

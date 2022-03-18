@@ -1,20 +1,20 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name : csvsearchjob
+  name : binancemainjob
   labels:
-    binance: csvsearch
+    binance: binancemain
 spec:
-  #schedule: "*/1 * * * *"
-  schedule: "* 6 */23 * *"
+  schedule: "*/5 * * * *"
+  #schedule: "* 6 */23 * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: csvsearchjob
+          - name: binancemain
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["python3.8", "./csvsearch.py"]
+            command: ["python3.8", "./binancemain.py"]
             imagePullPolicy: Always
             volumeMounts:
             - name: binancevol
