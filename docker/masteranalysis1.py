@@ -1,4 +1,3 @@
-
 import pandas as pd
 import ta.trend as tr
 import ta.volatility as tv

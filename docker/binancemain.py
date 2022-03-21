@@ -1,5 +1,3 @@
-# %=45.90163934426229, BTC=5.423025105843332
-
 from binance.client import Client
 from binance.enums import *
 from binance.exceptions import *

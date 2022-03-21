@@ -47,13 +47,13 @@ if __name__ == '__main__':
             atr_win = (splits[2][4:])
             vpt_win = (splits[3][3:])
             vpt_slo = (splits[4][5:])
-            c = {i : [[stc_win,stc_slo,atr_win,vpt_win,vpt_slo,int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
+            c = {i : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
         if not os.path.exists('/mnt/binance/input/inputparam'):
             os.makedirs('/mnt/binance/input/inputparam')
         with open('/mnt/binance/input/inputparam/'+str(i)+'.txt', 'w') as f:
             f.write(str(c))
-        try:
-            shutil.rmtree('/mnt/binance/output/'+str(i))
-        except:
-            pass
+        #try:
+        #    shutil.rmtree('/mnt/binance/output/'+str(i))
+        #except:
+        #    pass
 
