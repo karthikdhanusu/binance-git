@@ -349,7 +349,7 @@ if __name__ == '__main__':
                         if abalanc > 10:
                             for obk in ob.iterrows():
                                 if obk[1]['symbol'] == item:
-                                    askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                    askprc = (("{:."+str(precision)+"f}").format(float(obk[1]['askPrice'])))
                                     askqty = float(obk[1]['askQty'])
                                     qty = float(usebtc-5)/float(askprc)
                                     ot = 1
@@ -359,7 +359,7 @@ if __name__ == '__main__':
                                                 symbol=item,
                                                 side=SIDE_BUY,
                                                 type=ORDER_TYPE_MARKET,
-                                                quantity=("{:."+str(precision)+"f}".format(float(qty))))
+                                                quantity=(("{:."+str(precision)+"f}").format(float(qty))))
                                             buyid = order['orderId']
                                             buyst = order['status']
                                             buyprc = order['fills'][0]['price']
@@ -378,7 +378,7 @@ if __name__ == '__main__':
             if abal != None:
                 abal = float(abal['free'])
                 if abal > 0.01:
-                    qty = ("{:."+str(precision)+"f}".format(float(abal)))
+                    qty = (("{:."+str(precision)+"f}").format(float(abal)))
                     quty = float(qty) - 0.0001
                     takeprft(item, prcfle)
                     with open(prcfle) as jsonfile:
@@ -397,7 +397,7 @@ if __name__ == '__main__':
                                     symbol=item,
                                     side=SIDE_SELL,
                                     type=ORDER_TYPE_MARKET,
-                                    quantity=("{:."+str(precision)+"f}".format(float(quty))))
+                                    quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                 sellid = order['orderId']
                                 sellst = order['status']
                                 if order['price']:
@@ -420,7 +420,7 @@ if __name__ == '__main__':
                                     symbol=item,
                                     side=SIDE_SELL,
                                     type=ORDER_TYPE_MARKET,
-                                    quantity=("{:."+str(precision)+"f}".format(float(quty))))
+                                    quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                 buyid = order['orderId']
                                 buyst = order['status']
                                 if order['price']:
