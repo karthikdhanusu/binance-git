@@ -47,11 +47,6 @@ class Analyse:
         df['atr'] = indicator_atr.average_true_range()
         return df['atr']
 
-    def ema(self):
-        indicator_ema200 = tr.EMAIndicator(self.close, window=200)
-        df['ema200'] = indicator_ema200.ema_indicator()
-        return df['ema200']
-
     def mavpt(self, mawin, vptsl):
         indicator_mavpt = tr.SMAIndicator(self.vpt, window=mawin)
         df['vptma'] = indicator_mavpt.sma_indicator()
@@ -330,7 +325,6 @@ if __name__ == '__main__':
             df['close'] = df['Close']
             df['volume'] = df['Volume']
             df['vpt'] = TA.VPT(ohlc=df)
-            emao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).ema()
             atro = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).atr_ind(atr_win=atr_win)
             stco = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).stcyc(stc_win=stc_win, stc_slo=stc_slo)
             vptmao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).mavpt(mawin=vpt_win, vptsl=vpt_slo)
@@ -338,7 +332,7 @@ if __name__ == '__main__':
             df['celg'] = chan[0]
             df['cest'] = chan[1]
             df = pd.concat([df['datetime'], df['High'], df['Low'], df['Close'],
-                            df['Volume'], emao, stco['stc'], stco['stcslo'], df['celg'], df['cest'], df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
+                            df['Volume'], stco['stc'], stco['stcslo'], df['celg'], df['cest'], df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
             row = df.tail(1)
             abal = client.get_asset_balance(asset=asset)
             if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
@@ -349,7 +343,7 @@ if __name__ == '__main__':
                         if abalanc > 10:
                             for obk in ob.iterrows():
                                 if obk[1]['symbol'] == item:
-                                    askprc = (("{:."+str(precision)+"f}").format(float(obk[1]['askPrice'])))
+                                    askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
                                     askqty = float(obk[1]['askQty'])
                                     qty = float(usebtc-5)/float(askprc)
                                     ot = 1

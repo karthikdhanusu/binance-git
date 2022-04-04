@@ -5,7 +5,7 @@ import numpy as np
 from timeit import default_timer as timer
 import os, shutil
 
-files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
 arr = os.listdir('/mnt/binance/output/')
 arr1 =  os.listdir('/mnt/binance/gatherdata/')
 npydata = 'pairsmastereven.npy'
@@ -95,6 +95,7 @@ if __name__ == '__main__':
                      for j in range(len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i)))):
                          for filename in inputfilelist:
                              output = filename.split('.')[0]+ '_master.csv'
+                             print(output)
                              if not os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv/'+str(output)):
                                  df = pd.read_csv('/mnt/binance/output/'+str(item)+'/'+str(i)+'/'+filename, sep=',')
                                  for col in df.columns:

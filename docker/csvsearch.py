@@ -4,7 +4,7 @@ import os
 import shutil
 
 if __name__ == '__main__':
-    lists = ['BTCUSDT','ETHBTC']
+    lists = ['SOLBTC','BNBBTC']
     dict1 = {}
     presicion = 0
     for i in lists:
@@ -12,25 +12,25 @@ if __name__ == '__main__':
                         'HdDVKCVKZGon5iNVY9cSwL2OPBMh22Y2QvMu68tr1ApublkPw6cd1RjbENX5hi6m',
                         {"verify": True, "timeout": 20})
         info = client.get_symbol_info(str(i))
-        for i in info:
-            if i == 'filters':
-                if (float(info[i][2]['stepSize']) * 1) == 0:
+        for j in info:
+            if j == 'filters':
+                if (float(info[j][2]['stepSize']) * 1) == 0:
                     presicion = 0
-                elif (float(info[i][2]['stepSize']) * 10) == 1:
+                elif (float(info[j][2]['stepSize']) * 10) == 1:
                     presicion = 1
-                elif (float(info[i][2]['stepSize']) * 100) == 1:
+                elif (float(info[j][2]['stepSize']) * 100) == 1:
                     presicion = 2
-                elif (float(info[i][2]['stepSize']) * 1000) == 1:
+                elif (float(info[j][2]['stepSize']) * 1000) == 1:
                     presicion = 3
-                elif (float(info[i][2]['stepSize']) * 10000) == 1:
+                elif (float(info[j][2]['stepSize']) * 10000) == 1:
                     presicion = 4
-                elif (float(info[i][2]['stepSize']) * 100000) == 1:
+                elif (float(info[j][2]['stepSize']) * 100000) == 1:
                     presicion = 5
-                elif (float(info[i][2]['stepSize']) * 1000000) == 1:
+                elif (float(info[j][2]['stepSize']) * 1000000) == 1:
                     presicion = 6
-                elif (float(info[i][2]['stepSize']) * 10000000) == 1:
+                elif (float(info[j][2]['stepSize']) * 10000000) == 1:
                     presicion = 7
-                elif (float(info[i][2]['stepSize']) * 100000000) == 1:
+                elif (float(info[j][2]['stepSize']) * 100000000) == 1:
                     presicion = 8
         if len(os.listdir('/mnt/binance/output/'+str(i)+'/finalcsv')) == 500:
             arr = os.listdir('/mnt/binance/output/'+str(i)+'/finalcsv')
@@ -47,7 +47,7 @@ if __name__ == '__main__':
             atr_win = (splits[2][4:])
             vpt_win = (splits[3][3:])
             vpt_slo = (splits[4][5:])
-            c = {i : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
+            c = {'"'+i+'"' : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
         if not os.path.exists('/mnt/binance/input/inputparam'):
             os.makedirs('/mnt/binance/input/inputparam')
         with open('/mnt/binance/input/inputparam/'+str(i)+'.txt', 'w') as f:

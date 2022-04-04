@@ -47,11 +47,6 @@ class Analyse:
         df['atr'] = indicator_atr.average_true_range()
         return df['atr']
 
-    def ema(self):
-        indicator_ema200 = tr.EMAIndicator(self.close, window=200)
-        df['ema200'] = indicator_ema200.ema_indicator()
-        return df['ema200']
-
     def mavpt(self, mawin, vptsl):
         indicator_mavpt = tr.SMAIndicator(self.vpt, window=mawin)
         df['vptma'] = indicator_mavpt.sma_indicator()
@@ -260,8 +255,6 @@ def takeprft(item,prcfle):
             stats.update({item: sl})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
-    print(sl,itemprc,tk1,tk2,tk3,tk4,curprc)
-    print(data)
 
 
 def coins():
@@ -308,7 +301,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ETHBTC']
+    items = ['SOLBTC','BNBBTC']
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
@@ -345,7 +338,6 @@ if __name__ == '__main__':
                 df['close'] = df['Close']
                 df['volume'] = df['Volume']
                 df['vpt'] = TA.VPT(ohlc=df)
-                emao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).ema()
                 atro = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).atr_ind(atr_win=atr_win)
                 stco = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).stcyc(stc_win=stc_win, stc_slo=stc_slo)
                 vptmao = Analyse(high=df['High'], close=df['Close'], low=df['Low'], volume=df['Volume'], vpt=df['vpt']).mavpt(mawin=vpt_win, vptsl=vpt_slo)
@@ -353,107 +345,106 @@ if __name__ == '__main__':
                 df['celg'] = chan[0]
                 df['cest'] = chan[1]
                 df = pd.concat([df['datetime'], df['High'], df['Low'], df['Close'],
-                                df['Volume'], emao, stco['stc'], stco['stcslo'], df['celg'], df['cest'], df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
+                                df['Volume'], stco['stc'], stco['stcslo'], df['celg'], df['cest'], df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
                 row = df.tail(1)
                 abal = client.get_asset_balance(asset=asset)
-                #if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
-                for day in dayd.iterrows():
-                    if day[1]['symbol'] == item:
-                        abalanc = float(client.get_asset_balance(asset=basset)['free'])
-                        #if abalanc > 0.01:
-                        for obk in ob.iterrows():
-                            if obk[1]['symbol'] == item:
-                                askprc = ("{:."+str(precision)+"f}".format(float(obk[1]['askPrice'])))
-                                askqty = float(obk[1]['askQty'])
-                                qty = float(usebtc-0.0001)/float(askprc)
-                                '''ot = 1
-                                while ot == 1:
-                                    try:
-                                        order = client.create_order(
-                                            symbol=item,
-                                            side=SIDE_BUY,
-                                            type=ORDER_TYPE_MARKET,
-                                            quantity=("{:."+str(precision)+"f}".format(float(qty))))
-                                        buyid = order['orderId']
-                                        buyst = order['status']
-                                        buyprc = order['fills'][0]['price']
-                                        if order['price']:
-                                            ot = 0
-                                            btcusdt = {}
-                                            curprcallbtc = client.get_all_tickers()
-                                            for i in curprcallbtc:
-                                                if i['symbol'] == item:
-                                                    curprcbtc = float(i['price'])
-                                            btcusdt.update({item: curprcbtc})
-                                            with open(prcfle, 'w') as outfile:
-                                                json.dump(btcusdt, outfile)
-                                    except BinanceAPIException as e:
-                                        time.sleep(5)'''
-                        abalanc1 = float(client.get_asset_balance(asset='USDT')['free'])
-                        #if abalanc1 > 10:
-                        for obk in ob.iterrows():
-                            if obk[1]['symbol'] == asset+'USDT':
-                                askprc = ("{:."+str(precision)+"f}".format(float(obk[1]['askPrice'])))
-                                askqty = float(obk[1]['askQty'])
-                                qty = float(useusdt-5)/float(askprc)
-                                '''ot = 1
-                                while ot == 1:
-                                    try:
-                                        order = client.create_order(
-                                            symbol=item,
-                                            side=SIDE_BUY,
-                                            type=ORDER_TYPE_MARKET,
-                                            quantity=("{:."+str(precision)+"f}".format(float(qty))))
-                                        buyid = order['orderId']
-                                        buyst = order['status']
-                                        buyprc = order['fills'][0]['price']
-                                        if order['price']:
-                                            ot = 0
-                                            btcusdt = {}
-                                            curprcallbtc = client.get_all_tickers()
-                                            for i in curprcallbtc:
-                                                if i['symbol'] == item:
-                                                    curprcbtc = float(i['price'])
-                                            btcusdt.update({item: curprcbtc})
-                                            with open(prcfle, 'w') as outfile:
-                                                json.dump(btcusdt, outfile)
-                                    except BinanceAPIException as e:
-                                        time.sleep(5)'''
-                        abalanc2 = float(client.get_asset_balance(asset='ETH')['free'])
-                        #if abalanc2 > 0.1:
-                        for obk in ob.iterrows():
-                            if obk[1]['symbol'] == asset+'ETH':
-                                askprc = ("{:."+str(precision)+"f}".format(float(obk[1]['askPrice'])))
-                                askqty = float(obk[1]['askQty'])
-                                qty = float(useeth-0.001)/float(askprc)
-                                '''ot = 1
-                                while ot == 1:
-                                    try:
-                                        order = client.create_order(
-                                            symbol=item,
-                                            side=SIDE_BUY,
-                                            type=ORDER_TYPE_MARKET,
-                                            quantity=("{:."+str(precision)+"f}".format(float(qty))))
-                                        buyid = order['orderId']
-                                        buyst = order['status']
-                                        buyprc = order['fills'][0]['price']
-                                        if order['price']:
-                                            ot = 0
-                                            btcusdt = {}
-                                            curprcallbtc = client.get_all_tickers()
-                                            for i in curprcallbtc:
-                                                if i['symbol'] == item:
-                                                    curprcbtc = float(i['price'])
-                                            btcusdt.update({item: curprcbtc})
-                                            with open(prcfle, 'w') as outfile:
-                                                json.dump(btcusdt, outfile)
-                                    except BinanceAPIException as e:
-                                        time.sleep(5)'''
+                if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
+                    for day in dayd.iterrows():
+                        if day[1]['symbol'] == item:
+                            abalanc = float(client.get_asset_balance(asset=basset)['free'])
+                            if abalanc > 0.01:
+                                for obk in ob.iterrows():
+                                    if obk[1]['symbol'] == item:
+                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                        askqty = float(obk[1]['askQty'])
+                                        qty = float(usebtc-0.0001)/float(askprc)
+                                        ot = 1
+                                        while ot == 1:
+                                            try:
+                                                order = client.create_order(
+                                                    symbol=item,
+                                                    side=SIDE_BUY,
+                                                    type=ORDER_TYPE_MARKET,
+                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                buyid = order['orderId']
+                                                buyst = order['status']
+                                                buyprc = order['fills'][0]['price']
+                                                if order['price']:
+                                                    ot = 0
+                                                    btcusdt = {}
+                                                    curprcallbtc = client.get_all_tickers()
+                                                    for i in curprcallbtc:
+                                                        if i['symbol'] == item:
+                                                            curprcbtc = float(i['price'])
+                                                    btcusdt.update({item: curprcbtc})
+                                                    with open(prcfle, 'w') as outfile:
+                                                        json.dump(btcusdt, outfile)
+                                            except BinanceAPIException as e:
+                                                time.sleep(5)
+                            abalanc1 = float(client.get_asset_balance(asset='USDT')['free'])
+                            if abalanc1 > 10:
+                                for obk in ob.iterrows():
+                                    if obk[1]['symbol'] == asset+'USDT':
+                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                        askqty = float(obk[1]['askQty'])
+                                        qty = float(useusdt-5)/float(askprc)
+                                        ot = 1
+                                        while ot == 1:
+                                            try:
+                                                order = client.create_order(
+                                                    symbol=item,
+                                                    side=SIDE_BUY,
+                                                    type=ORDER_TYPE_MARKET,
+                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                buyid = order['orderId']
+                                                buyst = order['status']
+                                                buyprc = order['fills'][0]['price']
+                                                if order['price']:
+                                                    ot = 0
+                                                    btcusdt = {}
+                                                    curprcallbtc = client.get_all_tickers()
+                                                    for i in curprcallbtc:
+                                                        if i['symbol'] == item:
+                                                            curprcbtc = float(i['price'])
+                                                    btcusdt.update({item: curprcbtc})
+                                                    with open(prcfle, 'w') as outfile:
+                                                        json.dump(btcusdt, outfile)
+                                            except BinanceAPIException as e:
+                                                time.sleep(5)
+                            abalanc2 = float(client.get_asset_balance(asset='ETH')['free'])
+                            if abalanc2 > 0.1:
+                                for obk in ob.iterrows():
+                                    if obk[1]['symbol'] == asset+'ETH':
+                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                        askqty = float(obk[1]['askQty'])
+                                        qty = float(useeth-0.001)/float(askprc)
+                                        ot = 1
+                                        while ot == 1:
+                                            try:
+                                                order = client.create_order(
+                                                    symbol=item,
+                                                    side=SIDE_BUY,
+                                                    type=ORDER_TYPE_MARKET,
+                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                buyid = order['orderId']
+                                                buyst = order['status']
+                                                buyprc = order['fills'][0]['price']
+                                                if order['price']:
+                                                    ot = 0
+                                                    btcusdt = {}
+                                                    curprcallbtc = client.get_all_tickers()
+                                                    for i in curprcallbtc:
+                                                        if i['symbol'] == item:
+                                                            curprcbtc = float(i['price'])
+                                                    btcusdt.update({item: curprcbtc})
+                                                    with open(prcfle, 'w') as outfile:
+                                                        json.dump(btcusdt, outfile)
+                                            except BinanceAPIException as e:
+                                                time.sleep(5)
                 if abal != None:
                     abal = float(abal['free'])
                     if abal > 0.01:
-                        qty = ("{:."+str(precision)+"f}".format(float(abal)))
-                        quty = float(qty) - 0.0001
+                        quty = (("{:."+str(precision)+"f}").format(float(abal)))
                         takeprft(item, prcfle)
                         with open(prcfle) as jsonfile:
                             data = json.load(jsonfile)
@@ -462,8 +453,7 @@ if __name__ == '__main__':
                         for i in curprcall:
                             if i['symbol'] == item:
                                 curprc = float(i['price'])
-                        if a4 < float(row['stc']) < a5 and float(row['stcslo']) < a6 and float(row['celg']) > float(
-                                row['Low']):
+                        if a4 < float(row['stc']) < a5 and float(row['stcslo']) < a6 and float(row['celg']) > float(row['Low']):
                             ot = 1
                             while ot == 1:
                                 try:
@@ -471,7 +461,7 @@ if __name__ == '__main__':
                                         symbol=item,
                                         side=SIDE_SELL,
                                         type=ORDER_TYPE_MARKET,
-                                        quantity=("{:."+str(precision)+"f}".format(float(quty))))
+                                        quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                     sellid = order['orderId']
                                     sellst = order['status']
                                     if order['price']:
@@ -494,7 +484,7 @@ if __name__ == '__main__':
                                         symbol=item,
                                         side=SIDE_SELL,
                                         type=ORDER_TYPE_MARKET,
-                                        quantity=("{:."+str(precision)+"f}".format(float(quty))))
+                                        quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                     buyid = order['orderId']
                                     buyst = order['status']
                                     if order['price']:

@@ -1,26 +1,21 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name : njitparalleljob-1
+  name : binancealtsjob
   labels:
-    binance: njit
+    binance: binancealts
 spec:
-  #schedule: "*/1 * * * *"
-  schedule: "*/15 17-23 */20 * *"
+  schedule: "*/5 * * * *"
+  #schedule: "* 6 */23 * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: njit-1
-            image: karthikdhanusu/gatherdataimg:njit1
-            command: ["python3.8", "./njitparatrue_vpt.py"]
+          - name: binancealts
+            image: karthikdhanusu/gatherdataimg:v1.2
+            command: ["python3.8", "./binancealts.py"]
             imagePullPolicy: Always
-            resources:
-              requests:
-                cpu: "30000m"
-              limits:
-                cpu: "30999m"
             volumeMounts:
             - name: binancevol
               mountPath: "/mnt/binance"
@@ -28,8 +23,7 @@ spec:
           - name: binancevol
             persistentVolumeClaim:
               claimName: nfs-pvc
+          automountServiceAccountToken: false 
           restartPolicy: Never
-          automountServiceAccountToken: false
           imagePullSecrets:
           - name: kdhanusu
-          

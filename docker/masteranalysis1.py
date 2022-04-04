@@ -75,7 +75,7 @@ def chan_ind():
 
 if __name__ == '__main__':
     begin_time = datetime.datetime.now()
-    items = ['BTCUSDT','ETHBTC']
+    items = ['LUNABTC','ADABTC']
     with open(csvfile) as f:
         p = f.readline()
     b = ast.literal_eval(p)

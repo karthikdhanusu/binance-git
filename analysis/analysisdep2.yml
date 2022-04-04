@@ -16,6 +16,11 @@ spec:
             image: karthikdhanusu/gatherdataimg:v1.2
             command: ["sh", "-c", "mkdir mastertech && cp -f /binance/gatherdata/src/techmaster/techmaster2.txt /binance/gatherdata/src/mastertech/ && mv /binance/gatherdata/src/mastertech/techmaster2.txt /binance/gatherdata/src/mastertech/techmaster.txt && python3.8 ./masteranalysis.py"]
             imagePullPolicy: Always
+            resources:
+              requests:
+                cpu: "5000m"
+              limits:
+                cpu: "5000m"
             volumeMounts:
             - name: binancevol
               mountPath: "/mnt/binance"
