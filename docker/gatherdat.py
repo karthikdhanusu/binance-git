@@ -11,7 +11,7 @@ delta = enddate-startdate
 def gatherdata():
     client = Client("BuhI6hTvPa2AkieQ3IBWWjEO5uzKjW7bcBL8o5dKblnULDtb7Z9irt9UK8ZguaWJ", "okW9lDhUEh8ilB8CNcOyYU0bSyqjkKXt0hNLRJviMblNxgSofh2o7XLHSJGR4QBl", {"verify": True, "timeout": 20})
     prices = client.get_all_tickers()
-    ticker = ['LUNABTC','ADABTC']      #f['symbol']
+    ticker = ['BNBBTC','SOLBTC']      #f['symbol']
     for tick in ticker:
         with open('/mnt/binance/gatherdata/'+str(tick)+str(delta.days)+'_5min.csv', 'w', newline='') as csvfile:
             fieldnames = ['Open time', 'Open', 'High', 'Low', 'Close', 'Volume', 'Close time', 'Quote asset volume',

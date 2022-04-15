@@ -4,14 +4,14 @@ import os
 import shutil
 
 if __name__ == '__main__':
-    lists = ['SOLBTC','BNBBTC']
-    dict1 = {}
+    lists = ['ADABTC','LUNABTC']
     presicion = 0
     for i in lists:
         client = Client('IbcuXBijlP4zgX4LBkD0YlDvFsj1IvvLcat7PuhtmwxkgXmpCi9iGaKC7EHNLbR6',
                         'HdDVKCVKZGon5iNVY9cSwL2OPBMh22Y2QvMu68tr1ApublkPw6cd1RjbENX5hi6m',
                         {"verify": True, "timeout": 20})
         info = client.get_symbol_info(str(i))
+        dict1 = {}
         for j in info:
             if j == 'filters':
                 if (float(info[j][2]['stepSize']) * 1) == 0:
@@ -52,6 +52,8 @@ if __name__ == '__main__':
             os.makedirs('/mnt/binance/input/inputparam')
         with open('/mnt/binance/input/inputparam/'+str(i)+'.txt', 'w') as f:
             f.write(str(c))
+        with open('/mnt/binance/input/prcfile/'+str(i)+'.txt', 'w') as f:
+            f.write(str('{"'+str(i)+'":0}'))
         #try:
         #    shutil.rmtree('/mnt/binance/output/'+str(i))
         #except:

@@ -301,7 +301,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['SOLBTC','BNBBTC']
+    items = ['ADABTC','LUNABTC']
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
@@ -392,7 +392,7 @@ if __name__ == '__main__':
                                         while ot == 1:
                                             try:
                                                 order = client.create_order(
-                                                    symbol=item,
+                                                    symbol=asset+'USDT',
                                                     side=SIDE_BUY,
                                                     type=ORDER_TYPE_MARKET,
                                                     quantity=(("{:."+str(precision)+"f}").format(float(qty))))
@@ -422,7 +422,7 @@ if __name__ == '__main__':
                                         while ot == 1:
                                             try:
                                                 order = client.create_order(
-                                                    symbol=item,
+                                                    symbol=asset+'ETH',
                                                     side=SIDE_BUY,
                                                     type=ORDER_TYPE_MARKET,
                                                     quantity=(("{:."+str(precision)+"f}").format(float(qty))))
