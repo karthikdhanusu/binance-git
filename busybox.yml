@@ -18,7 +18,7 @@ spec:
       - name: jump
         image: karthikdhanusu/gatherdataimg:v1.2
         imagePullPolicy: Always
-        command: ['sh', '-c', 'sleep 99999999']
+        command: ['sh', '-c', 'sleep 99999999999']
         volumeMounts:
         - name: binancevol
           mountPath: "/mnt/binance"

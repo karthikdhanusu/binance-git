@@ -301,7 +301,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ADABTC','LUNABTC']
+    items = ['ADABTC','LUNABTC','SOLBTC']
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
@@ -351,8 +351,7 @@ if __name__ == '__main__':
                 if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
                     for day in dayd.iterrows():
                         if day[1]['symbol'] == item:
-                            abalanc = float(client.get_asset_balance(asset=basset)['free'])
-                            if abalanc > 0.01:
+                            if usebtc > 0.01:
                                 for obk in ob.iterrows():
                                     if obk[1]['symbol'] == item:
                                         askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
@@ -381,8 +380,7 @@ if __name__ == '__main__':
                                                         json.dump(btcusdt, outfile)
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
-                            abalanc1 = float(client.get_asset_balance(asset='USDT')['free'])
-                            if abalanc1 > 10:
+                            elif useusdt > 10:
                                 for obk in ob.iterrows():
                                     if obk[1]['symbol'] == asset+'USDT':
                                         askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
@@ -411,8 +409,7 @@ if __name__ == '__main__':
                                                         json.dump(btcusdt, outfile)
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
-                            abalanc2 = float(client.get_asset_balance(asset='ETH')['free'])
-                            if abalanc2 > 0.1:
+                            elif useeth > 0.1:
                                 for obk in ob.iterrows():
                                     if obk[1]['symbol'] == asset+'ETH':
                                         askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))

@@ -5,8 +5,8 @@ metadata:
   labels:
     binance: njit
 spec:
-  #schedule: "*/1 * * * *"
-  schedule: "*/15 17-23 */20 * *"
+  schedule: "*/1 * * * *"
+    #schedule: "10-59 23 15 * *"
   jobTemplate:
     spec:
       template:
@@ -14,7 +14,7 @@ spec:
           containers:
           - name: njit-1
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["python3.8", "./njitparatrue_vpt.py"]
+            command: ["python3.8", "./njitparatrue_vpt1.py"]
             imagePullPolicy: Always
             resources:
               requests:

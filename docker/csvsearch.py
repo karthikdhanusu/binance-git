@@ -2,9 +2,10 @@ from binance.client import Client
 import pandas as pd
 import os
 import shutil
+import json
 
 if __name__ == '__main__':
-    lists = ['ADABTC','LUNABTC']
+    lists = ['SOLBTC','BNBBTC']
     presicion = 0
     for i in lists:
         client = Client('IbcuXBijlP4zgX4LBkD0YlDvFsj1IvvLcat7PuhtmwxkgXmpCi9iGaKC7EHNLbR6',
@@ -32,7 +33,7 @@ if __name__ == '__main__':
                     presicion = 7
                 elif (float(info[j][2]['stepSize']) * 100000000) == 1:
                     presicion = 8
-        if len(os.listdir('/mnt/binance/output/'+str(i)+'/finalcsv')) == 500:
+        if len(os.listdir('/mnt/binance/output/'+str(i)+'/finalcsv')) <= 500:
             arr = os.listdir('/mnt/binance/output/'+str(i)+'/finalcsv')
             for filename in arr:
                 df = pd.read_csv('/mnt/binance/output/'+str(i)+'/finalcsv/'+filename, sep=',')
@@ -47,11 +48,11 @@ if __name__ == '__main__':
             atr_win = (splits[2][4:])
             vpt_win = (splits[3][3:])
             vpt_slo = (splits[4][5:])
-            c = {'"'+i+'"' : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
+            c = {i : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
         if not os.path.exists('/mnt/binance/input/inputparam'):
             os.makedirs('/mnt/binance/input/inputparam')
         with open('/mnt/binance/input/inputparam/'+str(i)+'.txt', 'w') as f:
-            f.write(str(c))
+            f.write(str(json.dumps(c)))
         with open('/mnt/binance/input/prcfile/'+str(i)+'.txt', 'w') as f:
             f.write(str('{"'+str(i)+'":0}'))
         #try:
