@@ -306,7 +306,8 @@ def candles(items, intv):
 
 if __name__ == '__main__':
     items = ['ADABTC','LUNABTC','SOLBTC','BNBBTC']
-    for item in random.shuffle(items):
+    random.shuffle(items)
+    for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
         with open(master) as json_file:
