@@ -257,6 +257,9 @@ def takeprft(item,prcfle):
                 json.dump(stats, outfile)
 
 
+    print(sl, tk1, tk2 , tk3 , itemprc, curprc)
+
+
 def coins():
     coin = client.get_exchange_info()
     sf = pd.DataFrame.from_dict(coin['symbols'], orient='columns')
@@ -330,7 +333,7 @@ if __name__ == '__main__':
                 useusdt = float(usdtbal())
                 useeth = float(ethbal())
                 basset = item[3:]
-                asset = item[:3]
+                asset = item[:-3]
                 df = candles(item, intv=Client.KLINE_INTERVAL_5MINUTE)
                 df['high'] = df['High']
                 df['low'] = df['Low']
@@ -439,7 +442,7 @@ if __name__ == '__main__':
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
                 if abal != None:
-                    abal = float(abal['free'])
+                    abal = (float(float(abal['free'])-(((float(abal['free']))*1)/100)))
                     if abal > 0.01:
                         quty = (("{:."+str(precision)+"f}").format(float(abal)))
                         takeprft(item, prcfle)

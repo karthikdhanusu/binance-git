@@ -14,7 +14,7 @@ spec:
           containers:
           - name: njit-1
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["python3.8", "./njitparatrue_vpt1.py"]
+            command: ["python3.8", "./njitparatrue_vpt.py"]
             imagePullPolicy: Always
             resources:
               requests:

@@ -338,9 +338,7 @@ if __name__ == '__main__':
             if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
                 for day in dayd.iterrows():
                     if day[1]['symbol'] == item:
-                        abalan = client.get_asset_balance(asset=basset)
-                        abalanc = float(abalan['free'])
-                        if abalanc > 10:
+                        if usebtc > 10:
                             for obk in ob.iterrows():
                                 if obk[1]['symbol'] == item:
                                     askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
