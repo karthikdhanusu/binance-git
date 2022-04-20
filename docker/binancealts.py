@@ -10,6 +10,7 @@ from finta import TA
 import time
 import logging
 import json
+import random
 
 
 client = Client('roUY76zDwxC2PLvV0BttyXW0NrwUKXWtjkP1qrJfcT5scXjHM0f3f0MH1QZ6PWi0', 'I38nIe0x4O8KKAK1worAIQrLtDCo4kipQFsdWcyMhDKO1TrY5bU9qyHLkvbZ8M2Q' , {"verify": True, "timeout": 20})
@@ -304,8 +305,8 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ADABTC','LUNABTC','SOLBTC']
-    for item in items:
+    items = ['ADABTC','LUNABTC','SOLBTC','BNBBTC']
+    for item in random.shuffle(items):
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
         with open(master) as json_file:
