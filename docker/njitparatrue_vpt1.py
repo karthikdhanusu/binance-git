@@ -5,7 +5,7 @@ import numpy as np
 from timeit import default_timer as timer
 import os, shutil
 
-files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+files = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
 arr = os.listdir('/mnt/binance/output/')
 arr1 =  os.listdir('/mnt/binance/gatherdata/')
 npydata = 'pairsmastereven.npy'
@@ -67,6 +67,21 @@ def logic(a, df_open, df_high, df_low, df_close, df_stc, df_stcslo, df_celg, df_
             btc1 = 0
     return row
 
+'''def csvsearch():
+    csvfile1 = 'H:\\binance\\input\\masterjson.json'
+    dict1 = {}
+    json1 = {}
+    arr = os.listdir('H:\\binance\\output\\' + str(item) + '\\finalcsv')
+    for filename in arr:
+        df = pd.read_csv('H:\\binance\\output\\' + str(item) + '\\finalcsv\\' + filename, sep=',')
+        max_val = df['buyq'].max()
+        row = df[df['buyq'] == df['buyq'].max()]
+        dict1.update({row: max_val})
+    a = list(dict1.keys())[list(dict1.values()).index(max(dict1.values()))]
+    if os.path.isfile(csvfile1):
+        data = json.loads(csvfile1)
+        print(dict1)'''
+
 
 if __name__ == '__main__':
      set_num_threads(31)
@@ -74,39 +89,52 @@ if __name__ == '__main__':
          for i in files:
              if os.path.exists('/mnt/binance/output/'+str(item)+'/'+str(i)) and len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))) <= 20:
                  inputfilelist = os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))
-                 for j in range(len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i)))):
-                     for filename in inputfilelist:
-                         output = filename.split('.')[0]+ '_master.csv'
-                         if not os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv/'+str(output)):
-                             df = pd.read_csv('/mnt/binance/output/'+str(item)+'/'+str(i)+'/'+filename, sep=',')
-                             for col in df.columns:
-                                 if col == 'pl':
-                                     df[col].values[:] = 0
-                             df_datetime = df['datetime'].to_numpy()
-                             df_open = df['Open'].to_numpy(dtype=float)
-                             df_high = df['High'].to_numpy(dtype=float)
-                             df_low = df['Low'].to_numpy(dtype=float)
-                             df_close = df['Close'].to_numpy(dtype=float)
-                             df_stc = df['stc'].to_numpy(dtype=float)
-                             df_stcslo = df['stcslo'].to_numpy(dtype=float)
-                             df_celg = df['celg'].to_numpy(dtype=float)
-                             df_cest = df['cest'].to_numpy(dtype=float)
-                             df_vpt = df['vpt'].to_numpy(dtype=float)
-                             df_vptma = df['vptma'].to_numpy(dtype=float)
-                             df_vptslo = df['vptslo'].to_numpy(dtype=float)
-                             a = load('/mnt/binance/input/'+npydata)
-                             start = timer()
-                             f = logic(a, df_open, df_high, df_low, df_close, df_stc, df_stcslo, df_celg, df_cest, df_vpt, df_vptma, df_vptslo)
-                             f = f[~np.all(f == 0, axis=1)]
-                             df = pd.DataFrame(f, columns=('a1','a2','a3','a4','a5','a6','p','l','pp','buyq', 'btc'))
-                             if os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv'):
-                                 df.to_csv('/mnt/binance/output/' + str(item) + '/finalcsv/' + output)
-                                 print(output, " with GPU: ", timer() - start)
-                             elif not os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv'):
-                                 os.makedirs('/mnt/binance/output/' + str(item) + '/finalcsv')
-                                 df.to_csv('/mnt/binance/output/' + str(item) + '/finalcsv/' + output)
-                                 print(output, " with GPU: ", timer() - start)
-
+                 if 'running.lck' not in inputfilelist:
+                     with open('/mnt/binance/output/'+str(item)+'/'+str(i)+'/running.lck', 'w') as f:
+                         f.write('Process running!')
+                     for j in range(len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i)))):
+                         for filename in inputfilelist:
+                             output = filename.split('.')[0]+ '_master.csv'
+                             print(output)
+                             if not os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv/'+str(output)):
+                                 df = pd.read_csv('/mnt/binance/output/'+str(item)+'/'+str(i)+'/'+filename, sep=',')
+                                 for col in df.columns:
+                                     if col == 'pl':
+                                         df[col].values[:] = 0
+                                 df_datetime = df['datetime'].to_numpy()
+                                 df_open = df['Open'].to_numpy(dtype=float)
+                                 df_high = df['High'].to_numpy(dtype=float)
+                                 df_low = df['Low'].to_numpy(dtype=float)
+                                 df_close = df['Close'].to_numpy(dtype=float)
+                                 df_stc = df['stc'].to_numpy(dtype=float)
+                                 df_stcslo = df['stcslo'].to_numpy(dtype=float)
+                                 df_celg = df['celg'].to_numpy(dtype=float)
+                                 df_cest = df['cest'].to_numpy(dtype=float)
+                                 df_vpt = df['vpt'].to_numpy(dtype=float)
+                                 df_vptma = df['vptma'].to_numpy(dtype=float)
+                                 df_vptslo = df['vptslo'].to_numpy(dtype=float)
+                                 a = load('/mnt/binance/input/'+npydata)
+                                 start = timer()
+                                 f = logic(a, df_open, df_high, df_low, df_close, df_stc, df_stcslo, df_celg, df_cest, df_vpt, df_vptma, df_vptslo)
+                                 f = f[~np.all(f == 0, axis=1)]
+                                 df = pd.DataFrame(f, columns=('a1','a2','a3','a4','a5','a6','p','l','pp','buyq', 'btc'))
+                                 if os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv'):
+                                     df.to_csv('/mnt/binance/output/' + str(item) + '/finalcsv/' + output)
+                                     os.remove('/mnt/binance/output/' + str(item) + '/' + str(i) + '/' + filename)
+                                     print(output, " with GPU: ", timer() - start)
+                                 elif not os.path.exists('/mnt/binance/output/' + str(item) + '/finalcsv'):
+                                     os.makedirs('/mnt/binance/output/' + str(item) + '/finalcsv')
+                                     df.to_csv('/mnt/binance/output/' + str(item) + '/finalcsv/' + output)
+                                     os.remove('/mnt/binance/output/' + str(item) + '/' + str(i) + '/' + filename)
+                                     print(output, " with GPU: ", timer() - start)
+                             elif os.path.exists('/mnt/binance/output/'+str(item)+ '/finalcsv/'+str(output)):
+                                 try:
+                                    os.remove('/mnt/binance/output/'+str(item)+'/'+str(i)+'/'+ filename)
+                                 except:
+                                     pass
+                     os.remove('/mnt/binance/output/'+str(item)+'/'+str(i)+'/running.lck')
+                 elif 'running.lck' in inputfilelist:
+                     pass
      
 
      '''try:

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name : njitparalleljob-1
+  name : njitparalleljob-2
   labels:
     binance: njit
 spec:
@@ -12,9 +12,9 @@ spec:
       template:
         spec:
           containers:
-          - name: njit-1
+          - name: njit-2
             image: karthikdhanusu/gatherdataimg:v1.2
-            command: ["python3.8", "./njitparatrue_vpt.py"]
+            command: ["python3.8", "./njitparatrue_vpt1.py"]
             imagePullPolicy: Always
             resources:
               requests:

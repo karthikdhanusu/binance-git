@@ -127,6 +127,12 @@ if __name__ == '__main__':
                                      df.to_csv('/mnt/binance/output/' + str(item) + '/finalcsv/' + output)
                                      os.remove('/mnt/binance/output/' + str(item) + '/' + str(i) + '/' + filename)
                                      print(output, " with GPU: ", timer() - start)
+                             elif os.path.exists('/mnt/binance/output/'+str(item)+ '/finalcsv/'+str(output)):
+                                 try:
+                                    os.remove('/mnt/binance/output/'+str(item)+'/'+str(i)+'/'+ filename)
+                                 except:
+                                     pass
+                     os.remove('/mnt/binance/output/'+str(item)+'/'+str(i)+'/running.lck')
                  elif 'running.lck' in inputfilelist:
                      pass
      
