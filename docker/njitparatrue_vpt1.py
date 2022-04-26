@@ -87,7 +87,7 @@ if __name__ == '__main__':
      set_num_threads(31)
      for item in arr:
          for i in files:
-             if os.path.exists('/mnt/binance/output/'+str(item)+'/'+str(i)) and len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))) <= 20:
+             if os.path.exists('/mnt/binance/output/'+str(item)+'/'+str(i)) and len(os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))) <= 30:
                  inputfilelist = os.listdir('/mnt/binance/output/'+str(item)+'/'+str(i))
                  if 'running.lck' not in inputfilelist:
                      with open('/mnt/binance/output/'+str(item)+'/'+str(i)+'/running.lck', 'w') as f:

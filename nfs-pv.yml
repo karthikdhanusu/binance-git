@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-c273a7e3-d8fb-42e0-822f-fd1436513464
+  annotations:
+    pv.kubernetes.io/provisioned-by: cluster.local/nfs-subdir-external-provisioner
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 2500Gi
+  mountOptions:
+  - tcp
+  - nfsvers=3
+  nfs:
+    path: "/zpool-128572/mnt12/default-nfs-pvc-pvc-c273a7e3-d8fb-42e0-822f-fd1436513464"
+    server: 10.201.25.195
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  volumeMode: Filesystem

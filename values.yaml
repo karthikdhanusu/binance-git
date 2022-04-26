@@ -1,6 +1,6 @@
 nfs:
-  server: '10.24.71.10'
-  path: '/zpool-128128/mnt'
+  server: '10.201.25.195'
+  path: '/zpool-128572/mnt12/default-nfs-pvc-pvc-c273a7e3-d8fb-42e0-822f-fd1436513464'
   mountOptions:
     - tcp
     - nfsvers=3

@@ -305,7 +305,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ADABTC','LUNABTC','SOLBTC','BNBBTC']
+    items = ['ADABTC','LUNABTC','SOLBTC','BNBBTC','AVAXBTC','DOGEBTC','DOTBTC']
     random.shuffle(items)
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
@@ -373,6 +373,7 @@ if __name__ == '__main__':
                                                 buyid = order['orderId']
                                                 buyst = order['status']
                                                 buyprc = order['fills'][0]['price']
+                                                print(order)
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
@@ -402,6 +403,7 @@ if __name__ == '__main__':
                                                 buyid = order['orderId']
                                                 buyst = order['status']
                                                 buyprc = order['fills'][0]['price']
+                                                print(order)
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
@@ -431,6 +433,7 @@ if __name__ == '__main__':
                                                 buyid = order['orderId']
                                                 buyst = order['status']
                                                 buyprc = order['fills'][0]['price']
+                                                print(order)
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
@@ -444,8 +447,8 @@ if __name__ == '__main__':
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
                 if abal != None:
-                    abal = (float(float(abal['free'])-(((float(abal['free']))*1)/100)))
-                    if abal > 0.01:
+                    abal = (float(float(abal['free'])-(((float(abal['free']))*0.5)/100)))
+                    if abal >= 1:
                         quty = (("{:."+str(precision)+"f}").format(float(abal)))
                         takeprft(item, prcfle)
                         with open(prcfle) as jsonfile:
@@ -466,6 +469,7 @@ if __name__ == '__main__':
                                         quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                     sellid = order['orderId']
                                     sellst = order['status']
+                                    print(order)
                                     if order['price']:
                                         ot = 0
                                         btcusdt = {}
@@ -489,6 +493,7 @@ if __name__ == '__main__':
                                         quantity=(("{:."+str(precision)+"f}").format(float(quty))))
                                     buyid = order['orderId']
                                     buyst = order['status']
+                                    print(order)
                                     if order['price']:
                                         ot = 0
                                         btcusdt = {}

@@ -5,7 +5,7 @@ metadata:
   labels:
     binance: analyze
 spec:
-  #schedule: "*/1 * * * *"
+  #schedule: "*/3 * * * *"
   schedule: "4 7 */19 * *"
   jobTemplate:
     spec:

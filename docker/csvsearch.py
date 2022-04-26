@@ -5,7 +5,7 @@ import shutil
 import json
 
 if __name__ == '__main__':
-    lists = ['AVAXBTC','DOTBTC','DOGEBTC']
+    lists = ['APEBTC']
     presicion = 0
     for i in lists:
         client = Client('IbcuXBijlP4zgX4LBkD0YlDvFsj1IvvLcat7PuhtmwxkgXmpCi9iGaKC7EHNLbR6',

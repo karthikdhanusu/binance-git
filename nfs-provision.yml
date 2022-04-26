@@ -7,6 +7,7 @@ spec:
   accessModes:
   - ReadWriteMany
   storageClassName: nfs
+  volumeName: "pvc-c273a7e3-d8fb-42e0-822f-fd1436513464"
   resources:
     requests:
-      storage: 1200Gi
+      storage: 2500Gi
