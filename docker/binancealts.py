@@ -16,6 +16,7 @@ import random
 client = Client('roUY76zDwxC2PLvV0BttyXW0NrwUKXWtjkP1qrJfcT5scXjHM0f3f0MH1QZ6PWi0', 'I38nIe0x4O8KKAK1worAIQrLtDCo4kipQFsdWcyMhDKO1TrY5bU9qyHLkvbZ8M2Q' , {"verify": True, "timeout": 20})
 
 stats = {}
+prcflebtc = '/mnt/binance/input/prcfile/BTCUSDT.txt'
 
 
 def trendline(data, order=1):
@@ -70,195 +71,316 @@ def takeprft(item,prcfle):
     for i in curprcall:
         if i['symbol'] == item:
             curprc = float(i['price'])
-    sl = float(itemprc - ((itemprc * 2) / 100))
-    tk1 = float(itemprc + ((itemprc * 1) / 100))
-    tk2 = float(itemprc + ((itemprc * 1.5) / 100))
-    tk3 = float(itemprc + ((itemprc * 2) / 100))
-    tk4 = float(itemprc + ((itemprc * 2.5) / 100))
-    tk5 = float(itemprc + ((itemprc * 3) / 100))
-    tk6 = float(itemprc + ((itemprc * 3.5) / 100))
-    tk7 = float(itemprc + ((itemprc * 4) / 100))
-    tk8 = float(itemprc + ((itemprc * 4.5) / 100))
-    tk9 = float(itemprc + ((itemprc * 5) / 100))
-    tk10 = float(itemprc + ((itemprc * 5.5) / 100))
-    tk11 = float(itemprc + ((itemprc * 6) / 100))
-    tk12 = float(itemprc + ((itemprc * 6.5) / 100))
-    tk13 = float(itemprc + ((itemprc * 7) / 100))
-    tk14 = float(itemprc + ((itemprc * 7.5) / 100))
-    tk15 = float(itemprc + ((itemprc * 8) / 100))
-    tk16 = float(itemprc + ((itemprc * 8.5) / 100))
-    tk17 = float(itemprc + ((itemprc * 9) / 100))
-    tk18 = float(itemprc + ((itemprc * 9.5) / 100))
-    tk19 = float(itemprc + ((itemprc * 10) / 100))
-    tk20 = float(itemprc + ((itemprc * 11) / 100))
-    tk21 = float(itemprc + ((itemprc * 11.5) / 100))
-    tk22 = float(itemprc + ((itemprc * 12) / 100))
-    tk23 = float(itemprc + ((itemprc * 12.5) / 100))
-    tk24 = float(itemprc + ((itemprc * 13) / 100))
-    tk25 = float(itemprc + ((itemprc * 13.5) / 100))
-    tk26 = float(itemprc + ((itemprc * 14) / 100))
-    tk27 = float(itemprc + ((itemprc * 14.5) / 100))
-    tk28 = float(itemprc + ((itemprc * 15) / 100))
-    tk29 = float(itemprc + ((itemprc * 15.5) / 100))
-    tk30 = float(itemprc + ((itemprc * 16) / 100))
-    if curprc > tk30:
-        if itmprc == tk28:
+    sl = float(itemprc - ((itemprc * 0.3) / 100))
+    tk1 = float(itemprc + ((itemprc * 0.25) / 100))
+    tk2 = float(itemprc + ((itemprc * 0.5) / 100))
+    tk3 = float(itemprc + ((itemprc * 0.75) / 100))
+    tk4 = float(itemprc + ((itemprc * 1) / 100))
+    tk5 = float(itemprc + ((itemprc * 1.25) / 100))
+    tk6 = float(itemprc + ((itemprc * 1.5) / 100))
+    tk7 = float(itemprc + ((itemprc * 1.75) / 100))
+    tk8 = float(itemprc + ((itemprc * 2) / 100))
+    tk9 = float(itemprc + ((itemprc * 2.25) / 100))
+    tk10 = float(itemprc + ((itemprc * 2.5) / 100))
+    tk11 = float(itemprc + ((itemprc * 2.75) / 100))
+    tk12 = float(itemprc + ((itemprc * 3) / 100))
+    tk13 = float(itemprc + ((itemprc * 3.25) / 100))
+    tk14 = float(itemprc + ((itemprc * 3.5) / 100))
+    tk15 = float(itemprc + ((itemprc * 3.75) / 100))
+    tk16 = float(itemprc + ((itemprc * 4) / 100))
+    tk17 = float(itemprc + ((itemprc * 4.25) / 100))
+    tk18 = float(itemprc + ((itemprc * 4.5) / 100))
+    tk19 = float(itemprc + ((itemprc * 4.75) / 100))
+    tk20 = float(itemprc + ((itemprc * 5.0) / 100))
+    tk21 = float(itemprc + ((itemprc * 5.25) / 100))
+    tk22 = float(itemprc + ((itemprc * 5.5) / 100))
+    tk23 = float(itemprc + ((itemprc * 5.75) / 100))
+    tk24 = float(itemprc + ((itemprc * 6) / 100))
+    tk25 = float(itemprc + ((itemprc * 6.25) / 100))
+    tk26 = float(itemprc + ((itemprc * 6.5) / 100))
+    tk27 = float(itemprc + ((itemprc * 6.75) / 100))
+    tk28 = float(itemprc + ((itemprc * 7) / 100))
+    tk29 = float(itemprc + ((itemprc * 7.25) / 100))
+    tk30 = float(itemprc + ((itemprc * 7.5) / 100))
+    tk31 = float(itemprc + ((itemprc * 7.75) / 100))
+    tk32 = float(itemprc + ((itemprc * 8) / 100))
+    tk33 = float(itemprc + ((itemprc * 8.25) / 100))
+    tk34 = float(itemprc + ((itemprc * 8.5) / 100))
+    tk35 = float(itemprc + ((itemprc * 8.75) / 100))
+    tk36 = float(itemprc + ((itemprc * 9) / 100))
+    tk37 = float(itemprc + ((itemprc * 9.5) / 100))
+    tk38 = float(itemprc + ((itemprc * 10) / 100))
+    tk39 = float(itemprc + ((itemprc * 10.5) / 100))
+    tk40 = float(itemprc + ((itemprc * 11) / 100))
+    tk41 = float(itemprc + ((itemprc * 11.5) / 100))
+    tk42 = float(itemprc + ((itemprc * 12) / 100))
+    tk43 = float(itemprc + ((itemprc * 12.5) / 100))
+    tk44 = float(itemprc + ((itemprc * 13) / 100))
+    tk45 = float(itemprc + ((itemprc * 13.5) / 100))
+    tk46 = float(itemprc + ((itemprc * 14) / 100))
+    tk47 = float(itemprc + ((itemprc * 14.5) / 100))
+    tk48 = float(itemprc + ((itemprc * 15) / 100))
+    tk49 = float(itemprc + ((itemprc * 15.5) / 100))
+    tk50 = float(itemprc + ((itemprc * 16) / 100))
+
+    if curprc > tk50:
+        if itmprc <= tk48:
+            stats.update({item: tk49})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk49 < curprc < tk50:
+        if itmprc <= tk47:
+            stats.update({item: tk48})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk48 < curprc < tk49:
+        if itmprc <= tk46:
+            stats.update({item: tk47})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk47 < curprc < tk48:
+        if itmprc <= tk45:
+            stats.update({item: tk46})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk46 < curprc < tk47:
+        if itmprc <= tk44:
+            stats.update({item: tk45})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk45 < curprc < tk46:
+        if itmprc <= tk43:
+            stats.update({item: tk44})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk44 < curprc < tk45:
+        if itmprc <= tk42:
+            stats.update({item: tk43})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk43 < curprc < tk44:
+        if itmprc <= tk41:
+            stats.update({item: tk42})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk42 < curprc < tk43:
+        if itmprc <= tk40:
+            stats.update({item: tk41})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk41 < curprc < tk42:
+        if itmprc <= tk39:
+            stats.update({item: tk40})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk40 < curprc < tk41:
+        if itmprc <= tk38:
+            stats.update({item: tk39})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk39 < curprc < tk40:
+        if itmprc <= tk37:
+            stats.update({item: tk38})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk38 < curprc < tk39:
+        if itmprc <= tk36:
+            stats.update({item: tk37})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk37 < curprc < tk38:
+        if itmprc <= tk35:
+            stats.update({item: tk36})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk36 < curprc < tk37:
+        if itmprc <= tk34:
+            stats.update({item: tk35})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk35 < curprc < tk36:
+        if itmprc <= tk33:
+            stats.update({item: tk34})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk34 < curprc < tk35:
+        if itmprc <= tk32:
+            stats.update({item: tk33})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk33 < curprc < tk34:
+        if itmprc <= tk31:
+            stats.update({item: tk32})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk32 < curprc < tk33:
+        if itmprc <= tk30:
+            stats.update({item: tk31})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk31 < curprc < tk32:
+        if itmprc <= tk29:
+            stats.update({item: tk30})
+            with open(prcfle, 'w') as outfile:
+                json.dump(stats, outfile)
+    elif tk30 < curprc < tk31:
+        if itmprc <= tk28:
             stats.update({item: tk29})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk29 < curprc < tk30:
-        if itmprc == tk27:
+        if itmprc <= tk27:
             stats.update({item: tk28})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk28 < curprc < tk29:
-        if itmprc == tk26:
+        if itmprc <= tk26:
             stats.update({item: tk27})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk27 < curprc < tk28:
-        if itmprc == tk25:
+        if itmprc <= tk25:
             stats.update({item: tk26})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk26 < curprc < tk27:
-        if itmprc == tk24:
+        if itmprc <= tk24:
             stats.update({item: tk25})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk25 < curprc < tk26:
-        if itmprc == tk23:
+        if itmprc <= tk23:
             stats.update({item: tk24})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk24 < curprc < tk25:
-        if itmprc == tk22:
+        if itmprc <= tk22:
             stats.update({item: tk23})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk23 < curprc < tk24:
-        if itmprc == tk21:
+        if itmprc <= tk21:
             stats.update({item: tk22})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk22 < curprc < tk23:
-        if itmprc == tk20:
+        if itmprc <= tk20:
             stats.update({item: tk21})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk21 < curprc < tk22:
-        if itmprc == tk19:
+        if itmprc <= tk19:
             stats.update({item: tk20})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk20 < curprc < tk21:
-        if itmprc == tk18:
+        if itmprc <= tk18:
             stats.update({item: tk19})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk19 < curprc < tk20:
-        if itmprc == tk17:
+        if itmprc <= tk17:
             stats.update({item: tk18})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk18 < curprc < tk19:
-        if itmprc == tk16:
+        if itmprc <= tk16:
             stats.update({item: tk17})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk17 < curprc < tk18:
-        if itmprc == tk15:
+        if itmprc <= tk15:
             stats.update({item: tk16})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk16 < curprc < tk17:
-        if itmprc == tk14:
+        if itmprc <= tk14:
             stats.update({item: tk15})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk15 < curprc < tk16:
-        if itmprc == tk13:
+        if itmprc <= tk13:
             stats.update({item: tk14})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk14 < curprc < tk15:
-        if itmprc == tk12:
+        if itmprc <= tk12:
             stats.update({item: tk13})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk13 < curprc < tk14:
-        if itmprc == tk11:
+        if itmprc <= tk11:
             stats.update({item: tk12})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk12 < curprc < tk13:
-        if itmprc == tk10:
+        if itmprc <= tk10:
             stats.update({item: tk11})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk11 < curprc < tk12:
-        if itmprc == tk9:
+        if itmprc <= tk9:
             stats.update({item: tk10})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk10 < curprc < tk11:
-        if itmprc == tk8:
+        if itmprc <= tk8:
             stats.update({item: tk9})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk9 < curprc < tk10:
-        if itmprc == tk7:
+        if itmprc <= tk7:
             stats.update({item: tk8})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk8 < curprc < tk9:
-        if itmprc == tk6:
+        if itmprc <= tk6:
             stats.update({item: tk7})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk7 < curprc < tk8:
-        if itmprc == tk5:
+        if itmprc <= tk5:
             stats.update({item: tk6})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk6 < curprc < tk7:
-        if itmprc == tk4:
+        if itmprc <= tk4:
             stats.update({item: tk5})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk5 < curprc < tk6:
-        if itmprc >= tk3:
+        if itmprc <= tk3:
             stats.update({item: tk4})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk4 < curprc < tk5:
-        if itmprc == tk2:
+        if itmprc <= tk2:
             stats.update({item: tk3})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk3 < curprc < tk4:
-        if itmprc == tk1:
+        if itmprc <= tk1:
             stats.update({item: tk2})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk2 < curprc < tk3:
-        if itmprc == itemprc:
+        if itmprc <= itemprc:
             stats.update({item: tk1})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk1 < curprc < tk2:
-        if itmprc == sl:
+        if itmprc <= sl:
             stats.update({item: itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
-    elif sl < curprc < tk1:
-        if itmprc == itemprc:
+    elif sl < curprc < tk1 :
+        if itmprc <= itemprc:
             stats.update({item: sl})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
 
 
-    print(sl, tk1, tk2 , tk3 , itemprc, curprc)
+    print(sl, itmprc ,itemprc, curprc)
 
 
 def coins():
@@ -305,8 +427,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ADABTC','LUNABTC','SOLBTC','BNBBTC','AVAXBTC','DOGEBTC','DOTBTC']
-    random.shuffle(items)
+    items = ['ADABTC','BNBBTC','AVAXBTC','DOGEBTC','DOTBTC','AVAXBTC','APEBTC','SOLBTC','LUNABTC'] # SOLBTC # LUNABTC
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
@@ -377,13 +498,12 @@ if __name__ == '__main__':
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
-                                                    curprcallbtc = client.get_all_tickers()
-                                                    for i in curprcallbtc:
-                                                        if i['symbol'] == item:
-                                                            curprcbtc = float(i['price'])
-                                                    btcusdt.update({item: curprcbtc})
+                                                    traprc1 = client.get_my_trades(symbol=item)
+                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                    btcusdt.update({item: itemprc1})
                                                     with open(prcfle, 'w') as outfile:
                                                         json.dump(btcusdt, outfile)
+                                                    takeprft(item, prcfle)
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
                             elif useusdt > 10:
@@ -407,13 +527,12 @@ if __name__ == '__main__':
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
-                                                    curprcallbtc = client.get_all_tickers()
-                                                    for i in curprcallbtc:
-                                                        if i['symbol'] == item:
-                                                            curprcbtc = float(i['price'])
-                                                    btcusdt.update({item: curprcbtc})
+                                                    traprc1 = client.get_my_trades(symbol=item)
+                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                    btcusdt.update({item: itemprc1})
                                                     with open(prcfle, 'w') as outfile:
                                                         json.dump(btcusdt, outfile)
+                                                    takeprft(item, prcfle)
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
                             elif useeth > 0.1:
@@ -437,17 +556,16 @@ if __name__ == '__main__':
                                                 if order['price']:
                                                     ot = 0
                                                     btcusdt = {}
-                                                    curprcallbtc = client.get_all_tickers()
-                                                    for i in curprcallbtc:
-                                                        if i['symbol'] == item:
-                                                            curprcbtc = float(i['price'])
-                                                    btcusdt.update({item: curprcbtc})
+                                                    traprc1 = client.get_my_trades(symbol=item)
+                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                    btcusdt.update({item: itemprc1})
                                                     with open(prcfle, 'w') as outfile:
                                                         json.dump(btcusdt, outfile)
+                                                    takeprft(item, prcfle)
                                             except BinanceAPIException as e:
                                                 time.sleep(5)
                 if abal != None:
-                    abal = (float(float(abal['free'])-(((float(abal['free']))*0.5)/100)))
+                    abal = (float(float(abal['free'])-(((float(abal['free']))*0.4)/100)))
                     if abal >= 1:
                         quty = (("{:."+str(precision)+"f}").format(float(abal)))
                         takeprft(item, prcfle)
@@ -475,10 +593,10 @@ if __name__ == '__main__':
                                         btcusdt = {}
                                         curprcallbtc = client.get_all_tickers()
                                         for i in curprcallbtc:
-                                            if i['symbol'] == item:
+                                            if i['symbol'] == "BTCUSDT":
                                                 curprcbtc = float(i['price'])
-                                        btcusdt.update({item: curprcbtc})
-                                        with open(prcfle, 'w') as outfile:
+                                        btcusdt.update({"BTCUSDT": curprcbtc})
+                                        with open(prcflebtc, 'w') as outfile:
                                             json.dump(btcusdt, outfile)
                                 except BinanceAPIException as e:
                                     time.sleep(5)
@@ -499,10 +617,10 @@ if __name__ == '__main__':
                                         btcusdt = {}
                                         curprcallbtc = client.get_all_tickers()
                                         for i in curprcallbtc:
-                                            if i['symbol'] == item:
+                                            if i['symbol'] == "BTCUSDT":
                                                 curprcbtc = float(i['price'])
-                                        btcusdt.update({item: curprcbtc})
-                                        with open(prcfle, 'w') as outfile:
+                                        btcusdt.update({"BTCUSDT": curprcbtc})
+                                        with open(prcflebtc, 'w') as outfile:
                                             json.dump(btcusdt, outfile)
                                         time.sleep(1800)
                                 except BinanceAPIException as e:

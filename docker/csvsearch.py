@@ -5,7 +5,7 @@ import shutil
 import json
 
 if __name__ == '__main__':
-    lists = ['APEBTC']
+    lists = ['NEARBTC','UNIBTC','FTTBTC','ATOMBTC']
     presicion = 0
     for i in lists:
         client = Client('IbcuXBijlP4zgX4LBkD0YlDvFsj1IvvLcat7PuhtmwxkgXmpCi9iGaKC7EHNLbR6',
@@ -48,6 +48,19 @@ if __name__ == '__main__':
             atr_win = (splits[2][4:])
             vpt_win = (splits[3][3:])
             vpt_slo = (splits[4][5:])
+            print(i)
+            print(int(stc_win))
+            print(int(stc_slo))
+            print(int(atr_win))
+            print(int(vpt_win))
+            print(int(vpt_slo))
+            print(int(b['a1'].values))
+            print(int(b['a2'].values))
+            print(int(b['a3'].values))
+            print(int(b['a4'].values))
+            print(int(b['a5'].values))
+            print(int(b['a6'].values))
+            print(int(presicion))
             c = {i : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
         if not os.path.exists('/mnt/binance/input/inputparam'):
             os.makedirs('/mnt/binance/input/inputparam')
