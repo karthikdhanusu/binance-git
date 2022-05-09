@@ -13,6 +13,7 @@ import json
 import random
 
 
+
 client = Client('roUY76zDwxC2PLvV0BttyXW0NrwUKXWtjkP1qrJfcT5scXjHM0f3f0MH1QZ6PWi0', 'I38nIe0x4O8KKAK1worAIQrLtDCo4kipQFsdWcyMhDKO1TrY5bU9qyHLkvbZ8M2Q' , {"verify": True, "timeout": 20})
 
 stats = {}
@@ -427,7 +428,7 @@ def candles(items, intv):
 
 
 if __name__ == '__main__':
-    items = ['ADABTC','BNBBTC','AVAXBTC','DOGEBTC','DOTBTC','AVAXBTC','APEBTC','SOLBTC','LUNABTC'] # SOLBTC # LUNABTC
+    items = ['ADABTC','BNBBTC','AVAXBTC','DOGEBTC','DOTBTC','AVAXBTC','APEBTC','NEARBTC','UNIBTC','FTTBTC','ATOMBTC','SOLBTC'] # SOLBTC # LUNABTC
     for item in items:
         prcfle = '/mnt/binance/input/prcfile/'+str(item)+'.txt'
         master = '/mnt/binance/input/inputparam/'+str(item)+'.txt'
@@ -477,93 +478,94 @@ if __name__ == '__main__':
                 if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
                     for day in dayd.iterrows():
                         if day[1]['symbol'] == item:
-                            if usebtc > 0.01:
-                                for obk in ob.iterrows():
-                                    if obk[1]['symbol'] == item:
-                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
-                                        askqty = float(obk[1]['askQty'])
-                                        qty = float(usebtc-0.0001)/float(askprc)
-                                        ot = 1
-                                        while ot == 1:
-                                            try:
-                                                order = client.create_order(
-                                                    symbol=item,
-                                                    side=SIDE_BUY,
-                                                    type=ORDER_TYPE_MARKET,
-                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
-                                                buyid = order['orderId']
-                                                buyst = order['status']
-                                                buyprc = order['fills'][0]['price']
-                                                print(order)
-                                                if order['price']:
-                                                    ot = 0
-                                                    btcusdt = {}
-                                                    traprc1 = client.get_my_trades(symbol=item)
-                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                                    btcusdt.update({item: itemprc1})
-                                                    with open(prcfle, 'w') as outfile:
-                                                        json.dump(btcusdt, outfile)
-                                                    takeprft(item, prcfle)
-                                            except BinanceAPIException as e:
-                                                time.sleep(5)
-                            elif useusdt > 10:
-                                for obk in ob.iterrows():
-                                    if obk[1]['symbol'] == asset+'USDT':
-                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
-                                        askqty = float(obk[1]['askQty'])
-                                        qty = float(useusdt-5)/float(askprc)
-                                        ot = 1
-                                        while ot == 1:
-                                            try:
-                                                order = client.create_order(
-                                                    symbol=asset+'USDT',
-                                                    side=SIDE_BUY,
-                                                    type=ORDER_TYPE_MARKET,
-                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
-                                                buyid = order['orderId']
-                                                buyst = order['status']
-                                                buyprc = order['fills'][0]['price']
-                                                print(order)
-                                                if order['price']:
-                                                    ot = 0
-                                                    btcusdt = {}
-                                                    traprc1 = client.get_my_trades(symbol=item)
-                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                                    btcusdt.update({item: itemprc1})
-                                                    with open(prcfle, 'w') as outfile:
-                                                        json.dump(btcusdt, outfile)
-                                                    takeprft(item, prcfle)
-                                            except BinanceAPIException as e:
-                                                time.sleep(5)
-                            elif useeth > 0.1:
-                                for obk in ob.iterrows():
-                                    if obk[1]['symbol'] == asset+'ETH':
-                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
-                                        askqty = float(obk[1]['askQty'])
-                                        qty = float(useeth-0.001)/float(askprc)
-                                        ot = 1
-                                        while ot == 1:
-                                            try:
-                                                order = client.create_order(
-                                                    symbol=asset+'ETH',
-                                                    side=SIDE_BUY,
-                                                    type=ORDER_TYPE_MARKET,
-                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
-                                                buyid = order['orderId']
-                                                buyst = order['status']
-                                                buyprc = order['fills'][0]['price']
-                                                print(order)
-                                                if order['price']:
-                                                    ot = 0
-                                                    btcusdt = {}
-                                                    traprc1 = client.get_my_trades(symbol=item)
-                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                                    btcusdt.update({item: itemprc1})
-                                                    with open(prcfle, 'w') as outfile:
-                                                        json.dump(btcusdt, outfile)
-                                                    takeprft(item, prcfle)
-                                            except BinanceAPIException as e:
-                                                time.sleep(5)
+                            if day[1]['openPrice'] > day[1]['prevClosePrice'] and day[1]['askQty'] > day[1]['bidQty']:
+                                if usebtc > 0.01:
+                                    for obk in ob.iterrows():
+                                        if obk[1]['symbol'] == item:
+                                            askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                            askqty = float(obk[1]['askQty'])
+                                            qty = float(usebtc-0.0001)/float(askprc)
+                                            ot = 1
+                                            while ot == 1:
+                                                try:
+                                                    order = client.create_order(
+                                                        symbol=item,
+                                                        side=SIDE_BUY,
+                                                        type=ORDER_TYPE_MARKET,
+                                                        quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                    buyid = order['orderId']
+                                                    buyst = order['status']
+                                                    buyprc = order['fills'][0]['price']
+                                                    print(order)
+                                                    if order['price']:
+                                                        ot = 0
+                                                        btcusdt = {}
+                                                        traprc1 = client.get_my_trades(symbol=item)
+                                                        itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                        btcusdt.update({item: itemprc1})
+                                                        with open(prcfle, 'w') as outfile:
+                                                            json.dump(btcusdt, outfile)
+                                                        takeprft(item, prcfle)
+                                                except BinanceAPIException as e:
+                                                    time.sleep(5)
+                                elif useusdt > 10:
+                                    for obk in ob.iterrows():
+                                        if obk[1]['symbol'] == asset+'USDT':
+                                            askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                            askqty = float(obk[1]['askQty'])
+                                            qty = float(useusdt-5)/float(askprc)
+                                            ot = 1
+                                            while ot == 1:
+                                                try:
+                                                    order = client.create_order(
+                                                        symbol=asset+'USDT',
+                                                        side=SIDE_BUY,
+                                                        type=ORDER_TYPE_MARKET,
+                                                        quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                    buyid = order['orderId']
+                                                    buyst = order['status']
+                                                    buyprc = order['fills'][0]['price']
+                                                    print(order)
+                                                    if order['price']:
+                                                        ot = 0
+                                                        btcusdt = {}
+                                                        traprc1 = client.get_my_trades(symbol=item)
+                                                        itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                        btcusdt.update({item: itemprc1})
+                                                        with open(prcfle, 'w') as outfile:
+                                                            json.dump(btcusdt, outfile)
+                                                        takeprft(item, prcfle)
+                                                except BinanceAPIException as e:
+                                                    time.sleep(5)
+                                elif useeth > 0.1:
+                                    for obk in ob.iterrows():
+                                        if obk[1]['symbol'] == asset+'ETH':
+                                            askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                            askqty = float(obk[1]['askQty'])
+                                            qty = float(useeth-0.001)/float(askprc)
+                                            ot = 1
+                                            while ot == 1:
+                                                try:
+                                                    order = client.create_order(
+                                                        symbol=asset+'ETH',
+                                                        side=SIDE_BUY,
+                                                        type=ORDER_TYPE_MARKET,
+                                                        quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                    buyid = order['orderId']
+                                                    buyst = order['status']
+                                                    buyprc = order['fills'][0]['price']
+                                                    print(order)
+                                                    if order['price']:
+                                                        ot = 0
+                                                        btcusdt = {}
+                                                        traprc1 = client.get_my_trades(symbol=item)
+                                                        itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                        btcusdt.update({item: itemprc1})
+                                                        with open(prcfle, 'w') as outfile:
+                                                            json.dump(btcusdt, outfile)
+                                                        takeprft(item, prcfle)
+                                                except BinanceAPIException as e:
+                                                    time.sleep(5)
                 if abal != None:
                     abal = (float(float(abal['free'])-(((float(abal['free']))*0.4)/100)))
                     if abal >= 1:
@@ -595,7 +597,7 @@ if __name__ == '__main__':
                                         for i in curprcallbtc:
                                             if i['symbol'] == "BTCUSDT":
                                                 curprcbtc = float(i['price'])
-                                        btcusdt.update({"BTCUSDT": curprcbtc})
+                                        btcusdt.update({"BTCUSDT": curprcbtc, "lastprc": curprcbtc})
                                         with open(prcflebtc, 'w') as outfile:
                                             json.dump(btcusdt, outfile)
                                 except BinanceAPIException as e:
@@ -619,7 +621,7 @@ if __name__ == '__main__':
                                         for i in curprcallbtc:
                                             if i['symbol'] == "BTCUSDT":
                                                 curprcbtc = float(i['price'])
-                                        btcusdt.update({"BTCUSDT": curprcbtc})
+                                        btcusdt.update({"BTCUSDT": curprcbtc, "lastprc": curprcbtc})
                                         with open(prcflebtc, 'w') as outfile:
                                             json.dump(btcusdt, outfile)
                                         time.sleep(1800)

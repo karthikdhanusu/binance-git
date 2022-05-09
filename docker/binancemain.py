@@ -63,8 +63,7 @@ def takeprft(item,prcfle):
     with open(prcfle) as jsonfile:
         data = json.load(jsonfile)
     itmprc = float(data[item])
-    traprc = client.get_my_trades(symbol=item)
-    itemprc = float(traprc[len(traprc) - 1]['price'])
+    itemprc = float(data['lastprc'])
     curprcall = client.get_all_tickers()
     for i in curprcall:
         if i['symbol'] == item:
@@ -123,257 +122,257 @@ def takeprft(item,prcfle):
 
     if curprc > tk50:
         if itmprc <= tk48:
-            stats.update({item: tk49})
+            stats.update({item: tk49, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk49 < curprc < tk50:
         if itmprc <= tk47:
-            stats.update({item: tk48})
+            stats.update({item: tk48, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk48 < curprc < tk49:
         if itmprc <= tk46:
-            stats.update({item: tk47})
+            stats.update({item: tk47, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk47 < curprc < tk48:
         if itmprc <= tk45:
-            stats.update({item: tk46})
+            stats.update({item: tk46, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk46 < curprc < tk47:
         if itmprc <= tk44:
-            stats.update({item: tk45})
+            stats.update({item: tk45, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk45 < curprc < tk46:
         if itmprc <= tk43:
-            stats.update({item: tk44})
+            stats.update({item: tk44, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk44 < curprc < tk45:
         if itmprc <= tk42:
-            stats.update({item: tk43})
+            stats.update({item: tk43, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk43 < curprc < tk44:
         if itmprc <= tk41:
-            stats.update({item: tk42})
+            stats.update({item: tk42, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk42 < curprc < tk43:
         if itmprc <= tk40:
-            stats.update({item: tk41})
+            stats.update({item: tk41, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk41 < curprc < tk42:
         if itmprc <= tk39:
-            stats.update({item: tk40})
+            stats.update({item: tk40, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk40 < curprc < tk41:
         if itmprc <= tk38:
-            stats.update({item: tk39})
+            stats.update({item: tk39, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk39 < curprc < tk40:
         if itmprc <= tk37:
-            stats.update({item: tk38})
+            stats.update({item: tk38, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk38 < curprc < tk39:
         if itmprc <= tk36:
-            stats.update({item: tk37})
+            stats.update({item: tk37, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk37 < curprc < tk38:
         if itmprc <= tk35:
-            stats.update({item: tk36})
+            stats.update({item: tk36, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk36 < curprc < tk37:
         if itmprc <= tk34:
-            stats.update({item: tk35})
+            stats.update({item: tk35, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk35 < curprc < tk36:
         if itmprc <= tk33:
-            stats.update({item: tk34})
+            stats.update({item: tk34, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk34 < curprc < tk35:
         if itmprc <= tk32:
-            stats.update({item: tk33})
+            stats.update({item: tk33, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk33 < curprc < tk34:
         if itmprc <= tk31:
-            stats.update({item: tk32})
+            stats.update({item: tk32, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk32 < curprc < tk33:
         if itmprc <= tk30:
-            stats.update({item: tk31})
+            stats.update({item: tk31, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk31 < curprc < tk32:
         if itmprc <= tk29:
-            stats.update({item: tk30})
+            stats.update({item: tk30, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk30 < curprc < tk31:
         if itmprc <= tk28:
-            stats.update({item: tk29})
+            stats.update({item: tk29, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk29 < curprc < tk30:
         if itmprc <= tk27:
-            stats.update({item: tk28})
+            stats.update({item: tk28, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk28 < curprc < tk29:
         if itmprc <= tk26:
-            stats.update({item: tk27})
+            stats.update({item: tk27, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk27 < curprc < tk28:
         if itmprc <= tk25:
-            stats.update({item: tk26})
+            stats.update({item: tk26, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk26 < curprc < tk27:
         if itmprc <= tk24:
-            stats.update({item: tk25})
+            stats.update({item: tk25, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk25 < curprc < tk26:
         if itmprc <= tk23:
-            stats.update({item: tk24})
+            stats.update({item: tk24, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk24 < curprc < tk25:
         if itmprc <= tk22:
-            stats.update({item: tk23})
+            stats.update({item: tk23, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk23 < curprc < tk24:
         if itmprc <= tk21:
-            stats.update({item: tk22})
+            stats.update({item: tk22, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk22 < curprc < tk23:
         if itmprc <= tk20:
-            stats.update({item: tk21})
+            stats.update({item: tk21, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk21 < curprc < tk22:
         if itmprc <= tk19:
-            stats.update({item: tk20})
+            stats.update({item: tk20, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk20 < curprc < tk21:
         if itmprc <= tk18:
-            stats.update({item: tk19})
+            stats.update({item: tk19, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk19 < curprc < tk20:
         if itmprc <= tk17:
-            stats.update({item: tk18})
+            stats.update({item: tk18, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk18 < curprc < tk19:
         if itmprc <= tk16:
-            stats.update({item: tk17})
+            stats.update({item: tk17, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk17 < curprc < tk18:
         if itmprc <= tk15:
-            stats.update({item: tk16})
+            stats.update({item: tk16, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk16 < curprc < tk17:
         if itmprc <= tk14:
-            stats.update({item: tk15})
+            stats.update({item: tk15, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk15 < curprc < tk16:
         if itmprc <= tk13:
-            stats.update({item: tk14})
+            stats.update({item: tk14, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk14 < curprc < tk15:
         if itmprc <= tk12:
-            stats.update({item: tk13})
+            stats.update({item: tk13, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk13 < curprc < tk14:
         if itmprc <= tk11:
-            stats.update({item: tk12})
+            stats.update({item: tk12, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk12 < curprc < tk13:
         if itmprc <= tk10:
-            stats.update({item: tk11})
+            stats.update({item: tk11, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk11 < curprc < tk12:
         if itmprc <= tk9:
-            stats.update({item: tk10})
+            stats.update({item: tk10, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk10 < curprc < tk11:
         if itmprc <= tk8:
-            stats.update({item: tk9})
+            stats.update({item: tk9, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk9 < curprc < tk10:
         if itmprc <= tk7:
-            stats.update({item: tk8})
+            stats.update({item: tk8, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk8 < curprc < tk9:
         if itmprc <= tk6:
-            stats.update({item: tk7})
+            stats.update({item: tk7, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk7 < curprc < tk8:
         if itmprc <= tk5:
-            stats.update({item: tk6})
+            stats.update({item: tk6, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk6 < curprc < tk7:
         if itmprc <= tk4:
-            stats.update({item: tk5})
+            stats.update({item: tk5, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk5 < curprc < tk6:
         if itmprc <= tk3:
-            stats.update({item: tk4})
+            stats.update({item: tk4, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk4 < curprc < tk5:
         if itmprc <= tk2:
-            stats.update({item: tk3})
+            stats.update({item: tk3, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk3 < curprc < tk4:
         if itmprc <= tk1:
-            stats.update({item: tk2})
+            stats.update({item: tk2, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk2 < curprc < tk3:
         if itmprc <= itemprc:
-            stats.update({item: tk1})
+            stats.update({item: tk1, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif tk1 < curprc < tk2:
         if itmprc <= sl:
-            stats.update({item: itemprc})
+            stats.update({item: itemprc, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
     elif sl < curprc < tk1:
         if itmprc <= itemprc:
-            stats.update({item: sl})
+            stats.update({item: sl, "lastprc": itemprc})
             with open(prcfle, 'w') as outfile:
                 json.dump(stats, outfile)
 
@@ -459,33 +458,34 @@ if __name__ == '__main__':
             if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
                 for day in dayd.iterrows():
                     if day[1]['symbol'] == item:
-                        if usebtc > 10:
-                            for obk in ob.iterrows():
-                                if obk[1]['symbol'] == item:
-                                    askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
-                                    askqty = float(obk[1]['askQty'])
-                                    qty = float(usebtc-5)/float(askprc)
-                                    ot = 1
-                                    while ot == 1:
-                                        try:
-                                            order = client.create_order(
-                                                symbol=item,
-                                                side=SIDE_BUY,
-                                                type=ORDER_TYPE_MARKET,
-                                                quantity=(("{:."+str(precision)+"f}").format(float(qty))))
-                                            buyid = order['orderId']
-                                            buyst = order['status']
-                                            buyprc = order['fills'][0]['price']
-                                            if order['price']:
-                                                ot = 0
-                                                btcusdt = {}
-                                                traprc1 = client.get_my_trades(symbol="BTCUSDT")
-                                                itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                                btcusdt.update({item: itemprc1})
-                                                with open(prcfle, 'w') as outfile:
-                                                    json.dump(btcusdt, outfile)
-                                        except BinanceAPIException as e:
-                                            time.sleep(5)
+                        if day[1]['openPrice'] > day[1]['prevClosePrice'] and day[1]['askQty'] > day[1]['bidQty']:
+                            if usebtc > 10:
+                                for obk in ob.iterrows():
+                                    if obk[1]['symbol'] == item:
+                                        askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
+                                        askqty = float(obk[1]['askQty'])
+                                        qty = float(usebtc-5)/float(askprc)
+                                        ot = 1
+                                        while ot == 1:
+                                            try:
+                                                order = client.create_order(
+                                                    symbol=item,
+                                                    side=SIDE_BUY,
+                                                    type=ORDER_TYPE_MARKET,
+                                                    quantity=(("{:."+str(precision)+"f}").format(float(qty))))
+                                                buyid = order['orderId']
+                                                buyst = order['status']
+                                                buyprc = order['fills'][0]['price']
+                                                if order['price']:
+                                                    ot = 0
+                                                    btcusdt = {}
+                                                    traprc1 = client.get_my_trades(symbol="BTCUSDT")
+                                                    itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                    btcusdt.update({item: itemprc1,"lastprc":itemprc1})
+                                                    with open(prcfle, 'w') as outfile:
+                                                        json.dump(btcusdt, outfile)
+                                            except BinanceAPIException as e:
+                                                time.sleep(5)
             if abal != None:
                 abal = float(abal['free'])
                 if abal > 0.010:
@@ -516,7 +516,7 @@ if __name__ == '__main__':
                                     btcusdt = {}
                                     traprc1 = client.get_my_trades(symbol="BTCUSDT")
                                     itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                    btcusdt.update({item: itemprc1})
+                                    btcusdt.update({item: itemprc1,"lastprc":itemprc1})
                                     with open(prcfle, 'w') as outfile:
                                         json.dump(btcusdt, outfile)
                             except BinanceAPIException as e:
@@ -537,7 +537,7 @@ if __name__ == '__main__':
                                     btcusdt = {}
                                     traprc1 = client.get_my_trades(symbol="BTCUSDT")
                                     itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
-                                    btcusdt.update({item: itemprc1})
+                                    btcusdt.update({item: itemprc1,"lastprc":itemprc1})
                                     with open(prcfle, 'w') as outfile:
                                         json.dump(btcusdt, outfile)
                                     time.sleep(1800)

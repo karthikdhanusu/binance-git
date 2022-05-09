@@ -42,25 +42,13 @@ if __name__ == '__main__':
             a = list(dict1.keys())[list(dict1.values()).index(max(dict1.values()))]
             df = pd.read_csv('/mnt/binance/output/' + str(i) + '/finalcsv/' + a, sep=',')
             b = df[df['buyq'] == df['buyq'].max()]
+            b = df.head(1)
             splits = a.split('_')
             stc_win = (splits[1][3:])[:1]
             stc_slo = (splits[1][3:])[1:]
             atr_win = (splits[2][4:])
             vpt_win = (splits[3][3:])
             vpt_slo = (splits[4][5:])
-            print(i)
-            print(int(stc_win))
-            print(int(stc_slo))
-            print(int(atr_win))
-            print(int(vpt_win))
-            print(int(vpt_slo))
-            print(int(b['a1'].values))
-            print(int(b['a2'].values))
-            print(int(b['a3'].values))
-            print(int(b['a4'].values))
-            print(int(b['a5'].values))
-            print(int(b['a6'].values))
-            print(int(presicion))
             c = {i : [[int(stc_win),int(stc_slo),int(atr_win),int(vpt_win),int(vpt_slo),int(b['a1'].values),int(b['a2'].values),int(b['a3'].values),int(b['a4'].values),int(b['a5'].values),int(b['a6'].values)],[int(presicion)]]}
         if not os.path.exists('/mnt/binance/input/inputparam'):
             os.makedirs('/mnt/binance/input/inputparam')
