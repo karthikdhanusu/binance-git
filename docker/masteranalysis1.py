@@ -67,7 +67,7 @@ def getFiles(dirName):
 
 if __name__ == '__main__':
     begin_time = datetime.datetime.now()
-    items = ['ATOMBTC','LINKBTC','MATICBTC']
+    items = ['ALGOBTC','LINKBTC','MATICBTC','EGLDBTC','SANDBTC','XTZBTC','CAKEBTC','ICPBTC']
     with open(csvfile) as f:
         p = f.readline()
     b = ast.literal_eval(p)

@@ -475,11 +475,11 @@ if __name__ == '__main__':
                                 df['Volume'], stco['stc'], stco['stcslo'], df['celg'], df['cest'], df['vpt'], vptmao['vptma'], vptmao['vptslo']], axis=1)
                 row = df.tail(1)
                 abal = client.get_asset_balance(asset=asset)
-                if a1 < float(row['stc']) < a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
+                if a1 <= float(row['stc']) <= a2 and float(row['stcslo']) > a3 and float(row['vpt']) > float(row['vptma']) and float(row['vptslo']) > 0 and float(row['celg']) < float(row['Low']):
                     for day in dayd.iterrows():
                         if day[1]['symbol'] == item:
                             if day[1]['openPrice'] > day[1]['prevClosePrice'] and day[1]['askQty'] > day[1]['bidQty']:
-                                if usebtc > 0.01:
+                                if usebtc > 0.002:
                                     for obk in ob.iterrows():
                                         if obk[1]['symbol'] == item:
                                             askprc = ("{:.8f}".format(float(obk[1]['askPrice'])))
@@ -529,8 +529,12 @@ if __name__ == '__main__':
                                                     if order['price']:
                                                         ot = 0
                                                         btcusdt = {}
-                                                        traprc1 = client.get_my_trades(symbol=item)
-                                                        itemprc1 = float(traprc1[len(traprc1) - 1]['price'])
+                                                        traprc1 = client.get_my_trades(symbol=asset+'USDT')
+                                                        curprcallbtc = client.get_all_tickers()
+                                                        for i in curprcallbtc:
+                                                            if i['symbol'] == 'BTCUSDT':
+                                                                curprcbtc = float(i['price'])
+                                                        itemprc1 = float(float(traprc1[len(traprc1) - 1]['price'])/float(curprcbtc))
                                                         btcusdt.update({item: itemprc1})
                                                         with open(prcfle, 'w') as outfile:
                                                             json.dump(btcusdt, outfile)
@@ -568,7 +572,7 @@ if __name__ == '__main__':
                                                     time.sleep(5)
                 if abal != None:
                     abal = (float(float(abal['free'])-(((float(abal['free']))*0.4)/100)))
-                    if abal >= 1:
+                    if abal >= 0.5:
                         quty = (("{:."+str(precision)+"f}").format(float(abal)))
                         takeprft(item, prcfle)
                         with open(prcfle) as jsonfile:
@@ -578,7 +582,7 @@ if __name__ == '__main__':
                         for i in curprcall:
                             if i['symbol'] == item:
                                 curprc = float(i['price'])
-                        if a4 < float(row['stc']) < a5 and float(row['stcslo']) < a6 and float(row['celg']) > float(row['Low']):
+                        if a4 <= float(row['stc']) <= a5 and float(row['stcslo']) < a6 and float(row['celg']) > float(row['Low']):
                             ot = 1
                             while ot == 1:
                                 try:
